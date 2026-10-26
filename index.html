@@ -6,9 +6,9 @@
 <title>Voki-App</title>
 <meta name="description" content="Verben und Wörter für Französisch und Englisch lernen.">
 <link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
-<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
-<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/svg+xml" href="icon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Voki-App">
@@ -248,7 +248,7 @@ button.flip:hover { background: none; }
   <main id="app" aria-live="polite">
     <header class="masthead">
       <span class="eyebrow">Französisch · Englisch</span>
-      <h1 class="brand"><img src="icons/icon.svg" alt="" width="44" height="44">Voki-App</h1>
+      <h1 class="brand"><img src="icon.svg" alt="" width="44" height="44">Voki-App</h1>
       <p class="sub">Listen werden geladen …</p>
     </header>
   </main>
@@ -467,7 +467,7 @@ button.flip:hover { background: none; }
   function chipLang(l) { return '<span class="chip ' + esc(l) + '">' + esc((LANG[l] || LANG.fr).name) + "</span>"; }
 
   function viewHome() {
-    var h = '<header class="masthead"><span class="eyebrow">Französisch · Englisch</span><h1 class="brand"><img src="icons/icon.svg" alt="" width="44" height="44">Voki-App</h1>';
+    var h = '<header class="masthead"><span class="eyebrow">Französisch · Englisch</span><h1 class="brand"><img src="icon.svg" alt="" width="44" height="44">Voki-App</h1>';
     var totalKnown = 0, totalItems = 0;
     S.lists.forEach(function (l) { var st = listStats(l); totalKnown += st.known; totalItems += st.total; });
     if (S.dbState === "ready") h += '<p class="sub">' + S.lists.length + (S.lists.length === 1 ? " Liste" : " Listen") + " · " + totalKnown + " von " + totalItems + " Einträgen sitzen schon</p>";

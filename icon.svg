@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" rx="27" fill="#1D5BA6"/><g transform="translate(60 60) scale(1) translate(-60 -60)">
+<rect x="30" y="22" width="66" height="48" rx="6" fill="#B5D4F4" transform="rotate(-8 63 46)"/>
+<rect x="24" y="40" width="72" height="54" rx="6" fill="#FFFFFF"/>
+<rect x="24" y="52" width="72" height="2.5" fill="#E06A5F"/>
+<rect x="32" y="66" width="56" height="1.5" fill="#C9D8EA"/><rect x="32" y="78" width="56" height="1.5" fill="#C9D8EA"/>
+<text x="60" y="84" text-anchor="middle" font-family="Literata, Georgia, serif" font-size="30" font-weight="700" fill="#1D5BA6">voki</text></g></svg>

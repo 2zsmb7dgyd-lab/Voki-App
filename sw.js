@@ -1,7 +1,7 @@
 // Voki-App: offline-Speicher. Bei jeder neuen App-Version VERSION erhöhen.
-const VERSION = "voki-v1";
+const VERSION = "voki-v2";
 const CORE = ["./", "index.html", "lists.json", "manifest.webmanifest",
-  "icons/icon-192.png", "icons/icon-512.png", "icons/apple-touch-icon.png", "icons/favicon-32.png", "icons/icon.svg"];
+  "icon-192.png", "icon-512.png", "apple-touch-icon.png", "favicon-32.png", "icon.svg"];
 
 self.addEventListener("install", (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(CORE)).then(() => self.skipWaiting()));
