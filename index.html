@@ -1,0 +1,1215 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Voki-App</title>
+<meta name="description" content="Verben und Wörter für Französisch und Englisch lernen.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/svg+xml" href="icons/icon.svg">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Voki-App">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#FAF9F3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121823" media="(prefers-color-scheme: dark)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Literata:opsz,wght@7..72,500;7..72,600&family=Kalam:wght@400;700&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+/* Layout: ein Schulheft. Karopapier als Grund, roter Randstrich links, Karteikarten mit blauen Linien als Lernfläche. */
+:root {
+  --paper: #FAF9F3;
+  --grid: #DFE8F2;
+  --ink: #18263D;
+  --ink-soft: #55627A;
+  --blue: #1D5BA6;
+  --blue-wash: #E3EEFA;
+  --red: #C0362C;
+  --red-wash: #FBE8E5;
+  --green: #23744A;
+  --green-wash: #E2F2E8;
+  --amber: #8A5A0B;
+  --amber-wash: #FBF0D9;
+  --margin: #E7A29C;
+  --card: #FFFFFF;
+  --rule: #C9D8EA;
+  --line: #CDD6E1;
+  --font-ui: "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --font-word: "Literata", Georgia, "Times New Roman", serif;
+  --font-pen: "Kalam", "Comic Sans MS", "Segoe Print", cursive;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #121823; --grid: #1C2533; --ink: #E5EBF3; --ink-soft: #9BA8BB;
+    --blue: #82B4F0; --blue-wash: #1B2B44; --red: #F2877F; --red-wash: #3A1E1D;
+    --green: #74CC98; --green-wash: #16301F; --amber: #E9B65C; --amber-wash: #33270F;
+    --margin: #6E3C3A; --card: #1A2230; --rule: #2A3A52; --line: #2C3849;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #121823; --grid: #1C2533; --ink: #E5EBF3; --ink-soft: #9BA8BB;
+  --blue: #82B4F0; --blue-wash: #1B2B44; --red: #F2877F; --red-wash: #3A1E1D;
+  --green: #74CC98; --green-wash: #16301F; --amber: #E9B65C; --amber-wash: #33270F;
+  --margin: #6E3C3A; --card: #1A2230; --rule: #2A3A52; --line: #2C3849;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  background-color: var(--paper);
+  background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 22px 22px;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.page { max-width: 760px; margin: 0 auto; padding-block: 24px 64px; position: relative; }
+@media (min-width: 860px) {
+  .page { padding-left: 40px; }
+  .page::before { content: ""; position: absolute; left: 14px; top: 0; bottom: 0; width: 2px; background: var(--margin); }
+}
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+.brand { display: flex; align-items: center; gap: 12px; }
+.brand img { border-radius: 10px; flex: none; }
+h1 { font-family: var(--font-word); font-weight: 600; font-size: 2rem; line-height: 1.15; }
+h2 { font-family: var(--font-word); font-weight: 600; font-size: 1.5rem; line-height: 1.2; }
+h3 { font-size: 1rem; font-weight: 700; }
+p { margin: 0; }
+.muted { color: var(--ink-soft); }
+.small { font-size: 0.875rem; }
+.pen { font-family: var(--font-pen); color: var(--red); }
+.eyebrow { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 700; }
+.stack { display: flex; flex-direction: column; gap: 16px; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.spread { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; }
+
+button, .btn {
+  font: inherit; font-size: 0.95rem; cursor: pointer;
+  border-radius: 6px; padding: 9px 14px; min-height: 40px;
+  border: 1.5px solid var(--blue); background: transparent; color: var(--blue);
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+}
+button:hover { background: var(--blue-wash); }
+button.primary { background: var(--blue); color: var(--paper); }
+button.primary:hover { filter: brightness(1.08); background: var(--blue); }
+button.danger { border-color: var(--red); color: var(--red); }
+button.danger:hover { background: var(--red-wash); }
+button.quiet { border-color: transparent; color: var(--ink-soft); padding-inline: 8px; }
+button.quiet:hover { background: var(--blue-wash); color: var(--blue); }
+button:disabled { opacity: 0.55; cursor: default; }
+:focus-visible { outline: 2.5px solid var(--blue); outline-offset: 2px; }
+
+input[type="text"], textarea, select {
+  font: inherit; color: var(--ink); background: var(--card);
+  border: 1.5px solid var(--line); border-radius: 6px; padding: 8px 10px; width: 100%; min-width: 0;
+}
+input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--blue); outline: none; }
+textarea { min-height: 120px; resize: vertical; }
+label.field { display: flex; flex-direction: column; gap: 6px; font-weight: 700; font-size: 0.9rem; }
+
+.sheet { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+.chip { font-size: 0.75rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; background: var(--blue-wash); color: var(--blue); white-space: nowrap; }
+.chip.fr { background: var(--blue-wash); color: var(--blue); }
+.chip.en { background: var(--red-wash); color: var(--red); }
+.chip.ex { background: var(--amber-wash); color: var(--amber); }
+
+/* Kopf */
+.masthead { display: flex; flex-direction: column; gap: 6px; margin-bottom: 24px; }
+.masthead .sub { color: var(--ink-soft); }
+.tabs { display: flex; gap: 4px; border-bottom: 1.5px solid var(--line); margin-bottom: 16px; overflow-x: auto; }
+.tabs button { border: none; border-radius: 6px 6px 0 0; color: var(--ink-soft); min-height: 38px; }
+.tabs button[aria-pressed="true"] { color: var(--blue); box-shadow: inset 0 -3px 0 var(--blue); }
+
+/* Listen */
+.lists { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr)); gap: 12px; }
+.listcard { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 10px; text-align: left; align-items: stretch; justify-content: flex-start; color: var(--ink); min-height: 0; }
+.listcard:hover { border-color: var(--blue); background: var(--card); }
+.listcard h3 { font-family: var(--font-word); font-weight: 600; font-size: 1.15rem; }
+.meter { height: 6px; border-radius: 3px; background: var(--grid); overflow: hidden; }
+.meter > span { display: block; height: 100%; background: var(--green); }
+.meta { display: flex; justify-content: space-between; gap: 8px; font-size: 0.85rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+
+.empty { border: 1.5px dashed var(--rule); border-radius: 8px; padding: 28px 20px; text-align: center; display: flex; flex-direction: column; gap: 10px; align-items: center; background: var(--card); }
+.note { padding: 12px 14px; border-radius: 6px; background: var(--amber-wash); color: var(--amber); font-size: 0.9rem; }
+.note.err { background: var(--red-wash); color: var(--red); }
+.note.ok { background: var(--green-wash); color: var(--green); }
+
+/* Modi */
+.modes { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.mode { flex-direction: column; align-items: flex-start; text-align: left; gap: 2px; padding: 14px; background: var(--card); border: 1px solid var(--line); color: var(--ink); min-height: 76px; }
+.mode strong { color: var(--blue); font-size: 1rem; }
+.mode span { font-size: 0.85rem; color: var(--ink-soft); }
+.mode:hover { border-color: var(--blue); background: var(--card); }
+
+/* Wortliste */
+.tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: var(--card); }
+table.words { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+table.words th { text-align: left; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); padding: 10px 12px; border-bottom: 1.5px solid var(--line); }
+table.words td { padding: 9px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.words tr:last-child td { border-bottom: none; }
+table.words td.w { font-family: var(--font-word); font-weight: 500; }
+.forms { font-size: 0.85rem; color: var(--ink-soft); }
+.dots { display: inline-flex; gap: 3px; vertical-align: middle; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--grid); border: 1px solid var(--rule); }
+.dots i.on { background: var(--green); border-color: var(--green); }
+
+/* Lernen */
+.studybar { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.studybar .meter { flex: 1; height: 8px; }
+.studybar .meter > span { background: var(--blue); }
+.count { font-variant-numeric: tabular-nums; color: var(--ink-soft); font-size: 0.9rem; white-space: nowrap; }
+.indexcard {
+  position: relative; background-color: var(--card); border: 1px solid var(--line); border-radius: 6px;
+  background-image: linear-gradient(var(--red) 0 0), repeating-linear-gradient(to bottom, transparent 0 31px, var(--rule) 31px 32px);
+  background-size: 100% 2px, 100% 100%; background-position: 0 56px, 0 58px; background-repeat: no-repeat, no-repeat;
+  padding: 18px 20px 24px; min-height: 280px; display: flex; flex-direction: column; gap: 14px;
+}
+.indexcard .top { display: flex; justify-content: space-between; align-items: center; gap: 8px; min-height: 32px; }
+.indexcard .center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding-top: 18px; }
+.bigword { font-family: var(--font-word); font-weight: 600; font-size: clamp(1.8rem, 6vw, 2.6rem); line-height: 1.15; overflow-wrap: anywhere; }
+.prompt { font-family: var(--font-word); font-weight: 500; font-size: clamp(1.4rem, 5vw, 2rem); line-height: 1.2; overflow-wrap: anywhere; }
+.prompt .gap { display: inline-block; min-width: 3.5em; border-bottom: 2px solid var(--blue); }
+button.flip { background: none; border: none; color: inherit; width: 100%; padding: 0; display: block; min-height: 0; }
+button.flip:hover { background: none; }
+.answerrow { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.answerrow button { min-height: 48px; font-size: 1rem; }
+.options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+@media (min-width: 560px) { .options { grid-template-columns: 1fr 1fr; } }
+.options button { justify-content: flex-start; min-height: 52px; font-family: var(--font-word); font-size: 1.1rem; color: var(--ink); border-color: var(--line); background: var(--card); }
+.options button:hover { border-color: var(--blue); }
+.options button.right { border-color: var(--green); background: var(--green-wash); color: var(--green); }
+.options button.wrong { border-color: var(--red); background: var(--red-wash); color: var(--red); }
+.writebox { display: flex; gap: 8px; }
+.writebox input { font-family: var(--font-word); font-size: 1.25rem; min-height: 50px; }
+.feedback { border-radius: 6px; padding: 12px 14px; display: flex; flex-direction: column; gap: 4px; }
+.feedback.ok { background: var(--green-wash); color: var(--green); }
+.feedback.accent { background: var(--amber-wash); color: var(--amber); }
+.feedback.wrong { background: var(--red-wash); color: var(--red); }
+.feedback .corr { font-family: var(--font-pen); font-size: 1.35rem; line-height: 1.2; }
+.struck { text-decoration: line-through; text-decoration-color: var(--red); text-decoration-thickness: 2px; }
+
+.conj { display: grid; grid-template-columns: max-content 1fr; gap: 6px 12px; align-items: center; text-align: left; width: 100%; max-width: 420px; }
+.conj .lab { color: var(--ink-soft); font-size: 0.95rem; text-align: right; }
+.conj .frm { font-family: var(--font-word); font-size: 1.1rem; }
+.conj input { font-family: var(--font-word); font-size: 1.05rem; }
+.conj .fix { grid-column: 2; margin-top: -4px; }
+.conj input.okc { border-color: var(--green); background: var(--green-wash); }
+.conj input.bad { border-color: var(--red); background: var(--red-wash); }
+.conj input.acc { border-color: var(--amber); background: var(--amber-wash); }
+.backtables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px 24px; width: 100%; text-align: left; }
+.backtables h4 { margin: 0 0 4px; font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--blue); }
+
+.grade { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+.grade .big { font-family: var(--font-pen); font-size: 4rem; line-height: 1; color: var(--red); font-weight: 700; }
+.mistakes { display: flex; flex-direction: column; }
+.mistakes > div { padding: 10px 0; border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 2px; }
+.mistakes > div:last-child { border-bottom: none; }
+
+/* Import */
+.seg { display: inline-flex; border: 1.5px solid var(--blue); border-radius: 6px; overflow: hidden; }
+.seg button { border: none; border-radius: 0; min-height: 38px; }
+.seg button[aria-pressed="true"] { background: var(--blue); color: var(--paper); }
+.checks { display: flex; flex-wrap: wrap; gap: 8px; }
+.checks label { display: inline-flex; gap: 6px; align-items: center; padding: 6px 10px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); font-size: 0.9rem; cursor: pointer; }
+.checks input { accent-color: var(--blue); }
+.drop { border: 2px dashed var(--rule); border-radius: 8px; padding: 22px; text-align: center; display: flex; flex-direction: column; gap: 8px; align-items: center; background: var(--card); }
+.drop.over { border-color: var(--blue); background: var(--blue-wash); }
+.thumbs { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.thumbs figure { margin: 0; position: relative; }
+.thumbs img { width: 84px; height: 84px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line); display: block; }
+.thumbs button { position: absolute; top: -8px; right: -8px; min-height: 26px; width: 26px; padding: 0; border-radius: 50%; background: var(--card); font-size: 0.9rem; }
+.pvitem { border: 1px solid var(--line); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; gap: 10px; background: var(--card); }
+.pvhead { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: center; }
+.pvtables { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 12px; }
+.pvtables .conj { max-width: none; }
+.status { display: flex; gap: 10px; align-items: center; color: var(--blue); }
+.spinner { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid var(--blue-wash); border-top-color: var(--blue); animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>
+
+<div class="page">
+  <main id="app" aria-live="polite">
+    <header class="masthead">
+      <span class="eyebrow">Französisch · Englisch</span>
+      <h1 class="brand"><img src="icons/icon.svg" alt="" width="44" height="44">Voki-App</h1>
+      <p class="sub">Listen werden geladen …</p>
+    </header>
+  </main>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- Grunddaten ---------- */
+  var LANG = {
+    fr: { name: "Französisch", short: "FR", speech: "fr-FR", to: "Auf Französisch",
+      pron: ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"],
+      tenses: ["Présent", "Passé composé", "Imparfait", "Futur simple", "Conditionnel présent", "Subjonctif présent", "Impératif"] },
+    en: { name: "Englisch", short: "EN", speech: "en-GB", to: "Auf Englisch",
+      pron: ["I", "you", "he/she/it", "we", "you", "they"],
+      tenses: ["Stammformen", "Simple present", "Simple past", "Present perfect", "Will-future", "Present progressive"] }
+  };
+  var DEFAULT_TENSE = { fr: ["Présent"], en: ["Stammformen"] };
+
+  var store = {
+    get: function (k, d) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+    set: function (k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
+  };
+
+  var S = {
+    lists: [], dbState: "loading", art: null, canWrite: false,
+    sample: null, imgLimits: null,
+    view: { name: "home" }, filter: "all",
+    settings: store.get("verbheft.settings.v1", { dir: "fwd" }),
+    prog: store.get("verbheft.prog.v1", {}),
+    session: null, imp: null, confirmDel: null, flash: null
+  };
+
+  var app = document.getElementById("app");
+
+  /* ---------- Hilfen ---------- */
+  function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function rnd(n) { return Math.floor(Math.random() * n); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = rnd(i + 1); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function findList(id) { for (var i = 0; i < S.lists.length; i++) if (S.lists[i].id === id) return S.lists[i]; return null; }
+  function itemKey(it) { return String(it.inf || it.q || ""); }
+  function newId() { return "l" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+  function norm(s) {
+    return String(s || "").toLowerCase().replace(/[’‘`´]/g, "'").replace(/\s+/g, " ").replace(/\s*'\s*/g, "'").replace(/[.!?]+$/, "").trim();
+  }
+  function plain(s) { return norm(s).normalize("NFD").replace(/[̀-ͯ]/g, ""); }
+
+  function shown(label, form, lang) {
+    if (lang === "fr" && label === "je" && /^[aeiouyhâàäéèêëîïôöûùüœ]/i.test(form)) return "j'" + form;
+    if (isPronounTable(label, lang)) return label + " " + form;
+    return form;
+  }
+  function isPronounTable(label, lang) { return LANG[lang] && LANG[lang].pron.indexOf(label) !== -1; }
+
+  // Mögliche richtige Antworten aus einer Lösung bilden
+  function variants(answer, splitAlts) {
+    var parts = splitAlts ? String(answer).split(/[,;\/]| oder | or /) : [String(answer)];
+    var out = [];
+    parts.forEach(function (p) {
+      p = p.trim(); if (!p) return;
+      out.push(p.replace(/\([^)]*\)/g, ""));
+      out.push(p.replace(/[()]/g, ""));
+      out.push(p.replace(/^to\s+/i, ""));
+      out.push(p.replace(/^(der|die|das|le|la|les|l'|un|une|the|a|an)\s+/i, ""));
+    });
+    return out.map(norm).filter(Boolean);
+  }
+  function stripPronoun(input, label) {
+    var s = norm(input);
+    if (!label) return s;
+    var ps = String(label).toLowerCase().split("/").concat(["j", "il", "elle", "on", "ils", "elles", "he", "she", "it"]);
+    for (var i = 0; i < ps.length; i++) {
+      var p = ps[i].trim(); if (!p) continue;
+      if (s.indexOf(p + " ") === 0) return s.slice(p.length + 1).trim();
+      if (s.indexOf(p + "'") === 0) return s.slice(p.length + 1).trim();
+    }
+    return s;
+  }
+  // "ok" | "accent" | "wrong"
+  function grade(input, answer, opts) {
+    opts = opts || {};
+    var given = opts.label ? stripPronoun(input, opts.label) : norm(input);
+    if (!given) return "wrong";
+    var givenAlt = given.replace(/^to\s+/, "").replace(/^(der|die|das|le|la|les|l'|un|une|the|a|an)\s+/, "");
+    var vs = variants(answer, !opts.label);
+    if (vs.indexOf(given) !== -1 || vs.indexOf(givenAlt) !== -1) return "ok";
+    var pv = vs.map(function (v) { return v.normalize("NFD").replace(/[̀-ͯ]/g, ""); });
+    var pg = plain(given), pga = plain(givenAlt);
+    if (pv.indexOf(pg) !== -1 || pv.indexOf(pga) !== -1) return "accent";
+    return "wrong";
+  }
+
+  /* ---------- Fortschritt ---------- */
+  function getP(listId, key) { var l = S.prog[listId]; return (l && l[key]) || { b: 0, r: 0, w: 0 }; }
+  function setP(listId, key, p) { if (!S.prog[listId]) S.prog[listId] = {}; S.prog[listId][key] = p; store.set("verbheft.prog.v1", S.prog); }
+  function record(listId, key, result) {
+    var p = getP(listId, key);
+    p = { b: p.b, r: p.r, w: p.w };
+    if (result === "ok") { p.b = Math.min(5, p.b + 1); p.r++; }
+    else if (result === "wrong") { p.b = 0; p.w++; }
+    setP(listId, key, p);
+  }
+  function listStats(list) {
+    var known = 0;
+    (list.items || []).forEach(function (it) { if (getP(list.id, itemKey(it)).b >= 3) known++; });
+    return { known: known, total: (list.items || []).length };
+  }
+  function pickItem(list, avoidKey) {
+    var items = list.items || [];
+    if (items.length === 1) return items[0];
+    var pool = [], total = 0;
+    items.forEach(function (it) {
+      if (itemKey(it) === avoidKey) return;
+      var w = Math.pow(6 - getP(list.id, itemKey(it)).b, 2);
+      pool.push([it, w]); total += w;
+    });
+    var r = Math.random() * total;
+    for (var i = 0; i < pool.length; i++) { r -= pool[i][1]; if (r <= 0) return pool[i][0]; }
+    return pool[pool.length - 1][0];
+  }
+
+  /* ---------- Fragen bauen ---------- */
+  function buildQuestion(list, mode) {
+    var s = S.session;
+    var item = pickItem(list, s.lastKey);
+    s.lastKey = itemKey(item);
+    var L = LANG[list.lang] || LANG.fr;
+    if (mode === "cards") return { kind: "card", item: item, flipped: false };
+    var tables = (item.tables || []).filter(function (t) { return t.forms && t.forms.length; });
+    if (list.kind === "verbs" && mode === "table" && tables.length) {
+      return { kind: "table", item: item, t: rnd(tables.length), tables: tables, result: null };
+    }
+    var useForm = list.kind === "verbs" && tables.length && Math.random() > 0.25;
+    if (useForm) {
+      var ti = rnd(tables.length), tb = tables[ti], i = rnd(tb.forms.length);
+      return { kind: "form", item: item, table: tb, i: i, label: tb.labels[i], answer: tb.forms[i],
+        pronoun: isPronounTable(tb.labels[i], list.lang), sub: (item.inf) + " · " + tb.name };
+    }
+    var dir = S.settings.dir === "mix" ? (Math.random() < 0.5 ? "fwd" : "rev") : S.settings.dir;
+    var q = list.kind === "verbs" ? item.inf : item.q;
+    var a = list.kind === "verbs" ? item.de : item.a;
+    return dir === "fwd"
+      ? { kind: "trans", item: item, prompt: q, answer: a, sub: "Auf Deutsch", speak: q }
+      : { kind: "trans", item: item, prompt: a, answer: q, sub: L.to, speak: null, rev: true };
+  }
+  function mcOptions(list, q) {
+    var pool = [];
+    if (q.kind === "form") {
+      (q.item.tables || []).forEach(function (t) { (t.forms || []).forEach(function (f) { pool.push(f); }); });
+      list.items.forEach(function (it) {
+        if (it === q.item) return;
+        (it.tables || []).forEach(function (t) { if (t.name === q.table.name && t.forms[q.i]) pool.push(t.forms[q.i]); });
+      });
+    } else {
+      list.items.forEach(function (it) {
+        if (it === q.item) return;
+        var v = list.kind === "verbs" ? (q.rev ? it.inf : it.de) : (q.rev ? it.q : it.a);
+        if (v) pool.push(v);
+      });
+    }
+    var seen = {}; seen[norm(q.answer)] = 1;
+    var picks = [];
+    shuffle(pool).forEach(function (p) { var n = norm(p); if (!seen[n] && picks.length < 3) { seen[n] = 1; picks.push(p); } });
+    return shuffle(picks.concat([q.answer]));
+  }
+
+  /* ---------- Sitzung ---------- */
+  function startSession(listId, mode) {
+    var list = findList(listId); if (!list || !list.items || !list.items.length) return;
+    S.session = { listId: listId, mode: mode, total: mode === "test" ? 12 : 20, i: 0, right: 0, mistakes: [], q: null, lastKey: null, answered: false };
+    nextQuestion();
+    go({ name: "study" });
+  }
+  function nextQuestion() {
+    var s = S.session, list = findList(s.listId);
+    if (!list || s.i >= s.total) { go({ name: "done" }); return false; }
+    var q = buildQuestion(list, s.mode);
+    if (s.mode === "mc" && (q.kind === "form" || q.kind === "trans")) {
+      q.options = mcOptions(list, q);
+      if (q.options.length < 2) q.options = null;
+    }
+    s.q = q; s.answered = false; s.feedback = null; s.picked = null;
+    return true;
+  }
+  function finishAnswer(result, given) {
+    var s = S.session, q = s.q;
+    record(s.listId, itemKey(q.item), result);
+    if (result === "ok") s.right += 1; else if (result === "accent") s.right += 0.5;
+    if (result !== "ok") s.mistakes.push({ q: q, given: given, result: result });
+    s.answered = true;
+  }
+  function advance() { var s = S.session; s.i++; if (nextQuestion()) render(); }
+
+  /* ---------- Navigation ---------- */
+  function go(v) { S.view = v; S.confirmDel = null; render(); try { window.scrollTo(0, 0); } catch (e) { } }
+
+  /* ---------- Darstellung ---------- */
+  function render() {
+    var v = S.view.name, html = "";
+    if (v === "home") html = viewHome();
+    else if (v === "list") html = viewList();
+    else if (v === "study") html = viewStudy();
+    else if (v === "done") html = viewDone();
+    else if (v === "import") html = viewImport();
+    app.innerHTML = html;
+    afterRender();
+  }
+
+  function dots(b) {
+    var h = '<span class="dots" title="' + (b >= 3 ? "sicher" : "noch üben") + '">';
+    for (var i = 0; i < 5; i++) h += '<i class="' + (i < b ? "on" : "") + '"></i>';
+    return h + "</span>";
+  }
+  function chipLang(l) { return '<span class="chip ' + esc(l) + '">' + esc((LANG[l] || LANG.fr).name) + "</span>"; }
+
+  function viewHome() {
+    var h = '<header class="masthead"><span class="eyebrow">Französisch · Englisch</span><h1 class="brand"><img src="icons/icon.svg" alt="" width="44" height="44">Voki-App</h1>';
+    var totalKnown = 0, totalItems = 0;
+    S.lists.forEach(function (l) { var st = listStats(l); totalKnown += st.known; totalItems += st.total; });
+    if (S.dbState === "ready") h += '<p class="sub">' + S.lists.length + (S.lists.length === 1 ? " Liste" : " Listen") + " · " + totalKnown + " von " + totalItems + " Einträgen sitzen schon</p>";
+    h += "</header>";
+    if (S.flash) { h += '<p class="note ' + (S.flash.type || "") + '" style="margin-bottom:16px">' + esc(S.flash.text) + "</p>"; S.flash = null; }
+
+    if (S.dbState === "loading") return h + '<div class="empty"><div class="spinner" aria-hidden="true"></div><p>Listen werden geladen …</p></div>';
+    if (S.dbState === "off") return h + '<div class="empty"><h3>Listen konnten nicht geladen werden</h3><p class="muted">Prüfe die Internetverbindung und lade die Seite neu.</p></div>';
+
+    h += '<div class="spread" style="margin-bottom:12px"><div class="tabs" role="group" aria-label="Sprache filtern" style="margin:0;border:none">';
+    [["all", "Alle"], ["fr", "Französisch"], ["en", "Englisch"]].forEach(function (f) {
+      h += '<button data-act="filter" data-v="' + f[0] + '" aria-pressed="' + (S.filter === f[0]) + '">' + f[1] + "</button>";
+    });
+    h += "</div>";
+    if (S.canWrite) h += '<button class="primary" data-act="new">Neue Liste</button>';
+    h += "</div>";
+
+    var lists = S.lists.filter(function (l) { return S.filter === "all" || l.lang === S.filter; });
+    if (!lists.length) {
+      h += '<div class="empty"><h3>' + (S.lists.length ? "Keine Listen in dieser Sprache" : "Noch keine Listen") + "</h3>";
+      h += S.canWrite
+        ? '<p class="muted">Fotografiere deine Verbliste aus dem Heft oder tippe die Wörter ein.</p><button class="primary" data-act="new">Erste Liste anlegen</button></div>'
+        : '<p class="muted">Sobald jemand eine Liste hinzufügt, erscheint sie hier.</p></div>';
+      return h;
+    }
+    h += '<div class="lists">';
+    lists.forEach(function (l) {
+      var st = listStats(l), pct = st.total ? Math.round(st.known / st.total * 100) : 0;
+      h += '<button class="listcard" data-act="open" data-id="' + esc(l.id) + '">';
+      h += '<div class="row">' + chipLang(l.lang) + '<span class="chip">' + (l.kind === "verbs" ? "Verben" : "Wörter") + "</span>" + (l.example ? '<span class="chip ex">Beispiel</span>' : "") + "</div>";
+      h += "<h3>" + esc(l.title) + "</h3>";
+      h += '<div class="meter" aria-hidden="true"><span style="width:' + pct + '%"></span></div>';
+      h += '<div class="meta"><span>' + st.known + " von " + st.total + " sicher</span><span>" + (l.kind === "verbs" ? tenseSummary(l) : st.total + " Wörter") + "</span></div>";
+      h += "</button>";
+    });
+    h += "</div>";
+    h += '<p class="muted small" style="margin-top:16px">Dein Lernfortschritt wird auf diesem Gerät gespeichert.</p>';
+    return h;
+  }
+  function tenseSummary(l) {
+    var names = {};
+    (l.items || []).forEach(function (it) { (it.tables || []).forEach(function (t) { names[t.name] = 1; }); });
+    var k = Object.keys(names);
+    return k.length ? k.join(", ") : "nur Bedeutung";
+  }
+
+  function viewList() {
+    var l = findList(S.view.id);
+    if (!l) return '<div class="empty"><h3>Diese Liste gibt es nicht mehr</h3><button data-act="home">Zu allen Listen</button></div>';
+    var st = listStats(l), verbs = l.kind === "verbs";
+    var hasTables = verbs && (l.items || []).some(function (it) { return it.tables && it.tables.length; });
+    var h = '<div class="stack">';
+    h += '<div><button class="quiet" data-act="home">← Alle Listen</button></div>';
+    h += '<div class="stack" style="gap:8px"><div class="row">' + chipLang(l.lang) + '<span class="chip">' + (verbs ? "Verben" : "Wörter") + "</span>" + (l.example ? '<span class="chip ex">Beispiel</span>' : "") + "</div>";
+    h += "<h2>" + esc(l.title) + "</h2>";
+    h += '<p class="muted">' + st.known + " von " + st.total + " sitzen" + (verbs ? " · " + esc(tenseSummary(l)) : "") + "</p></div>";
+
+    h += '<div class="modes">';
+    h += modeBtn("cards", "Karteikarten", "Umdrehen und selbst einschätzen");
+    h += modeBtn("mc", "Multiple Choice", "Aus vier Antworten wählen");
+    h += modeBtn("write", "Schreiben", "Die Antwort selbst eintippen");
+    if (hasTables) h += modeBtn("table", "Konjugieren", "Die ganze Tabelle ausfüllen");
+    h += modeBtn("test", "Probetest", "12 Fragen, Note am Schluss");
+    h += "</div>";
+
+    h += '<div class="spread"><label class="row small" for="dirsel"><span class="muted">Abfragerichtung der Bedeutung</span></label>';
+    h += '<select id="dirsel" data-act="dir" style="width:auto">';
+    [["fwd", (LANG[l.lang] || LANG.fr).name + " → Deutsch"], ["rev", "Deutsch → " + (LANG[l.lang] || LANG.fr).name], ["mix", "Gemischt"]].forEach(function (o) {
+      h += '<option value="' + o[0] + '"' + (S.settings.dir === o[0] ? " selected" : "") + ">" + o[1] + "</option>";
+    });
+    h += "</select></div>";
+
+    h += '<div class="spread"><h3>' + (verbs ? "Verben" : "Wörter") + " in dieser Liste</h3>";
+    if (S.canWrite) h += '<button data-act="append" data-id="' + esc(l.id) + '">Einträge hinzufügen</button>';
+    h += "</div>";
+    h += '<div class="tablewrap"><table class="words"><thead><tr><th>' + (verbs ? "Verb" : (LANG[l.lang] || LANG.fr).name) + "</th><th>Deutsch</th><th>Stand</th>" + (S.canWrite ? '<th><span class="sr">Entfernen</span></th>' : "") + "</tr></thead><tbody>";
+    (l.items || []).forEach(function (it, idx) {
+      var p = getP(l.id, itemKey(it));
+      h += '<tr><td class="w">' + esc(verbs ? it.inf : it.q);
+      if (verbs && it.tables && it.tables.length) {
+        it.tables.forEach(function (t) {
+          h += '<div class="forms"><strong>' + esc(t.name) + ":</strong> " + esc((t.forms || []).join(", ")) + "</div>";
+        });
+      }
+      h += "</td><td>" + esc(verbs ? it.de : it.a) + "</td><td>" + dots(p.b) + "</td>";
+      if (S.canWrite) h += '<td><button class="quiet" data-act="delitem" data-id="' + esc(l.id) + '" data-i="' + idx + '" aria-label="' + esc((verbs ? it.inf : it.q) + " entfernen") + '">✕</button></td>';
+      h += "</tr>";
+    });
+    h += "</tbody></table></div>";
+
+    h += '<div class="row">';
+    h += '<button class="quiet" data-act="resetprog" data-id="' + esc(l.id) + '">Fortschritt zurücksetzen</button>';
+    if (S.canWrite) {
+      if (S.confirmDel === l.id) h += '<span class="small" style="color:var(--red)">Liste für alle löschen?</span><button class="danger" data-act="delconfirm" data-id="' + esc(l.id) + '">Ja, löschen</button><button class="quiet" data-act="delcancel">Abbrechen</button>';
+      else h += '<button class="quiet" data-act="dellist" data-id="' + esc(l.id) + '">Liste löschen</button>';
+    }
+    h += "</div></div>";
+    return h;
+  }
+  function modeBtn(m, t, d) { return '<button class="mode" data-act="start" data-mode="' + m + '"><strong>' + t + "</strong><span>" + d + "</span></button>"; }
+
+  function speakBtn(text, lang) {
+    if (!text || !("speechSynthesis" in window)) return "<span></span>";
+    return '<button class="quiet" data-act="speak" data-text="' + esc(text) + '" data-lang="' + esc(lang) + '" aria-label="Vorlesen">♪ Vorlesen</button>';
+  }
+
+  function viewStudy() {
+    var s = S.session, list = findList(s.listId), q = s.q;
+    if (!list || !q) return '<div class="empty"><h3>Diese Liste gibt es nicht mehr</h3><button data-act="home">Zu allen Listen</button></div>';
+    var modeName = { cards: "Karteikarten", mc: "Multiple Choice", write: "Schreiben", table: "Konjugieren", test: "Probetest" }[s.mode];
+    var h = '<div class="stack">';
+    h += '<div class="studybar"><button class="quiet" data-act="quit">✕ Beenden</button><div class="meter" aria-hidden="true"><span style="width:' + Math.round(s.i / s.total * 100) + '%"></span></div><span class="count">' + (s.i + 1) + " / " + s.total + "</span></div>";
+    h += '<p class="eyebrow">' + esc(list.title) + " · " + modeName + "</p>";
+    if (q.kind === "card") h += cardView(list, q);
+    else if (q.kind === "table") h += tableView(list, q);
+    else if (s.mode === "mc" && q.options) h += mcView(list, q);
+    else h += writeView(list, q);
+    h += "</div>";
+    return h;
+  }
+
+  function promptHtml(list, q) {
+    if (q.kind === "form") {
+      var gap = '<span class="gap">&nbsp;</span>';
+      var lab = q.pronoun && list.lang === "fr" && q.label === "je" ? "je / j'" : q.label;
+      return '<div class="prompt">' + esc(lab) + (q.pronoun ? " " : ": ") + gap + '</div><p class="muted">' + esc(q.sub) + "</p>";
+    }
+    return '<div class="bigword">' + esc(q.prompt) + '</div><p class="muted">' + esc(q.sub) + "</p>";
+  }
+  function speakFor(list, q) {
+    if (q.kind === "form") return speakBtn(q.item.inf, list.lang);
+    if (q.kind === "trans" && q.speak) return speakBtn(q.speak, list.lang);
+    return "<span></span>";
+  }
+
+  function cardView(list, q) {
+    var it = q.item, verbs = list.kind === "verbs";
+    var front = verbs ? it.inf : it.q, back = verbs ? it.de : it.a;
+    var h = '<div class="indexcard"><div class="top"><span class="chip ' + esc(list.lang) + '">' + (q.flipped ? "Rückseite" : "Vorderseite") + "</span>" + speakBtn(front, list.lang) + "</div>";
+    h += '<button class="flip" data-act="flip" aria-label="Karte umdrehen"><div class="center">';
+    if (!q.flipped) {
+      h += '<div class="bigword">' + esc(front) + '</div><p class="muted small">Antippen oder Leertaste zum Umdrehen</p>';
+    } else {
+      h += '<p class="muted">' + esc(front) + '</p><div class="bigword">' + esc(back) + "</div>";
+      if (verbs && it.tables && it.tables.length) {
+        h += '<div class="backtables">';
+        it.tables.forEach(function (t) {
+          h += "<div><h4>" + esc(t.name) + '</h4><div class="conj">';
+          (t.forms || []).forEach(function (f, i) {
+            var lab = t.labels[i] || "";
+            var pr = isPronounTable(lab, list.lang);
+            h += '<span class="lab">' + esc(pr ? (list.lang === "fr" && lab === "je" && /^[aeiouyhâàéèêîôû]/i.test(f) ? "j'" : lab) : lab) + '</span><span class="frm">' + esc(f) + "</span>";
+          });
+          h += "</div></div>";
+        });
+        h += "</div>";
+      }
+    }
+    h += "</div></button></div>";
+    if (q.flipped) h += '<div class="answerrow"><button class="danger" data-act="cardres" data-r="wrong">Nochmal üben</button><button class="primary" data-act="cardres" data-r="ok">Gewusst</button></div>';
+    else h += '<div class="answerrow"><span></span><button class="primary" data-act="flip">Umdrehen</button></div>';
+    return h;
+  }
+
+  function mcView(list, q) {
+    var s = S.session;
+    var h = '<div class="indexcard"><div class="top"><span class="chip ' + esc(list.lang) + '">Wähle die richtige Antwort</span>' + speakFor(list, q) + '</div><div class="center">' + promptHtml(list, q) + "</div></div>";
+    h += '<div class="options" role="group" aria-label="Antworten">';
+    q.options.forEach(function (o, i) {
+      var cls = "";
+      if (s.answered) { if (o === q.answer) cls = "right"; else if (i === s.picked) cls = "wrong"; }
+      var txt = q.kind === "form" && q.pronoun ? shown(q.label, o, list.lang) : o;
+      h += '<button class="' + cls + '" data-act="mc" data-i="' + i + '"' + (s.answered ? " disabled" : "") + ">" + esc(txt) + "</button>";
+    });
+    h += "</div>";
+    if (s.answered) h += '<div class="row" style="justify-content:flex-end"><button class="primary" data-act="next" id="nextbtn">Weiter</button></div>';
+    return h;
+  }
+
+  function writeView(list, q) {
+    var s = S.session, test = s.mode === "test";
+    var h = '<div class="indexcard"><div class="top"><span class="chip ' + esc(list.lang) + '">' + (q.kind === "form" ? "Setze die richtige Form ein" : "Übersetze") + "</span>" + speakFor(list, q) + '</div><div class="center">' + promptHtml(list, q) + "</div></div>";
+    h += '<form class="writebox" data-form="write" autocomplete="off"><label class="sr" for="answer">Deine Antwort</label>';
+    h += '<input type="text" id="answer" name="answer" autocapitalize="off" spellcheck="false" placeholder="Antwort eintippen"' + (s.answered ? " readonly" : "") + ' value="' + esc(s.given || "") + '">';
+    h += !s.answered ? '<button class="primary" type="submit">' + (test ? "Weiter" : "Prüfen") + "</button>" : "";
+    h += "</form>";
+    if (list.lang === "fr" && !s.answered) {
+      h += '<div class="row" aria-label="Sonderzeichen">';
+      ["é", "è", "ê", "à", "â", "ç", "ù", "û", "î", "ï", "ô", "œ", "ë"].forEach(function (c) { h += '<button class="quiet" type="button" data-act="char" data-c="' + c + '" style="min-height:36px;padding:4px 10px;font-size:1.05rem">' + c + "</button>"; });
+      h += "</div>";
+    }
+    if (s.answered && s.feedback) {
+      var f = s.feedback, sol = q.kind === "form" && q.pronoun ? shown(q.label, q.answer, list.lang) : q.answer;
+      if (f === "ok") h += '<div class="feedback ok"><strong>Richtig!</strong></div>';
+      else if (f === "accent") h += '<div class="feedback accent"><strong>Fast. Achte auf die Akzente.</strong><span class="corr">' + esc(sol) + "</span></div>";
+      else h += '<div class="feedback wrong"><strong>Leider falsch.</strong>' + (s.given ? '<span class="struck">' + esc(s.given) + "</span>" : "") + '<span class="corr">' + esc(sol) + "</span></div>";
+      h += '<div class="row" style="justify-content:flex-end">';
+      if (f !== "ok") h += '<button class="quiet" data-act="override">Meine Antwort zählt doch</button>';
+      h += '<button class="primary" data-act="next" id="nextbtn">Weiter</button></div>';
+    }
+    return h;
+  }
+
+  function tableView(list, q) {
+    var s = S.session, t = q.tables[q.t];
+    var h = '<div class="indexcard"><div class="top"><span class="chip ' + esc(list.lang) + '">' + esc(t.name) + "</span>" + speakBtn(q.item.inf, list.lang) + '</div><div class="center">';
+    h += '<div class="bigword">' + esc(q.item.inf) + '</div><p class="muted">' + esc(q.item.de) + "</p>";
+    h += '<form class="conj" data-form="table" autocomplete="off">';
+    t.forms.forEach(function (f, i) {
+      var lab = t.labels[i] || "", r = q.result ? q.result[i] : null;
+      var cls = r === "ok" ? "okc" : r === "accent" ? "acc" : r === "wrong" ? "bad" : "";
+      h += '<label class="lab" for="cf' + i + '">' + esc(lab) + "</label>";
+      h += '<input type="text" id="cf' + i + '" class="' + cls + '" autocapitalize="off" spellcheck="false"' + (q.result ? " readonly" : "") + ' value="' + esc(q.given ? q.given[i] : "") + '">';
+      if (r && r !== "ok") h += '<span class="fix pen">' + esc(f) + "</span>";
+    });
+    h += '<button type="submit" hidden></button></form></div></div>';
+    if (!q.result) h += '<div class="row" style="justify-content:flex-end"><button class="primary" data-act="checktable">Prüfen</button></div>';
+    else {
+      var bad = q.result.filter(function (r) { return r !== "ok"; }).length;
+      h += '<div class="feedback ' + (bad ? "wrong" : "ok") + '"><strong>' + (bad ? bad + (bad === 1 ? " Form" : " Formen") + " noch nicht richtig. Die Korrektur steht in Rot." : "Alles richtig!") + "</strong></div>";
+      h += '<div class="row" style="justify-content:flex-end"><button class="primary" data-act="next" id="nextbtn">Weiter</button></div>';
+    }
+    return h;
+  }
+
+  function swissGrade(right, total) { var n = 1 + 5 * (right / total); return Math.round(n * 2) / 2; }
+
+  function viewDone() {
+    var s = S.session, list = findList(s.listId);
+    var h = '<div class="stack"><p class="eyebrow">' + esc(list ? list.title : "") + "</p>";
+    var right = Math.round(s.right * 10) / 10;
+    if (s.mode === "test") {
+      var g = swissGrade(s.right, s.total);
+      h += '<h2>Probetest fertig</h2><div class="grade"><span class="big">' + g.toFixed(1) + '</span><span class="muted">' + right + " von " + s.total + " Punkten · Note = Punkte ÷ Total × 5 + 1</span></div>";
+    } else {
+      h += "<h2>Runde fertig</h2><p>" + right + " von " + s.total + " richtig.</p>";
+    }
+    if (s.mistakes.length) {
+      h += '<div class="sheet stack" style="gap:8px"><h3>Das solltest du nochmals anschauen</h3><div class="mistakes">';
+      var seen = {};
+      s.mistakes.forEach(function (m) {
+        var q = m.q;
+        var label = q.kind === "form" ? (q.pronoun ? q.label + " ___" : q.label) + " (" + q.sub + ")" : q.kind === "table" ? q.item.inf + " · " + q.tables[q.t].name : q.kind === "card" ? (q.item.inf || q.item.q) : q.prompt;
+        var sol = q.kind === "form" ? (q.pronoun && list ? shown(q.label, q.answer, list.lang) : q.answer) : q.kind === "table" ? q.tables[q.t].forms.join(", ") : q.kind === "card" ? (q.item.de || q.item.a) : q.answer;
+        var k = label + "|" + sol; if (seen[k]) return; seen[k] = 1;
+        h += '<div><span class="muted small">' + esc(label) + "</span>";
+        if (m.given) h += '<span class="struck">' + esc(m.given) + "</span>";
+        h += '<span class="pen" style="font-size:1.25rem">' + esc(sol) + "</span></div>";
+      });
+      h += "</div></div>";
+    } else if (s.mode !== "cards") h += '<p class="note ok">Keine Fehler. Stark!</p>';
+    h += '<div class="row"><button class="primary" data-act="again">Nochmal</button><button data-act="backlist">Zur Liste</button></div></div>';
+    return h;
+  }
+
+  /* ---------- Import ---------- */
+  function openImport(listId) {
+    var l = listId ? findList(listId) : null;
+    S.imp = {
+      append: l ? l.id : null, title: l ? l.title : "", lang: l ? l.lang : "fr", kind: l ? l.kind : "verbs",
+      tenses: l ? guessTenses(l) : DEFAULT_TENSE.fr.slice(), text: "", files: [], busy: false, status: "", error: "", preview: null
+    };
+    go({ name: "import" });
+  }
+  function guessTenses(l) {
+    var names = {}; (l.items || []).forEach(function (it) { (it.tables || []).forEach(function (t) { names[t.name] = 1; }); });
+    var k = Object.keys(names); return k.length ? k : DEFAULT_TENSE[l.lang].slice();
+  }
+
+  function viewImport() {
+    var m = S.imp, L = LANG[m.lang];
+    var canPhoto = !!(S.sample && S.imgLimits);
+    var h = '<div class="stack"><div><button class="quiet" data-act="' + (m.append ? "backlist2" : "home") + '">← Zurück</button></div>';
+    h += "<h2>" + (m.append ? "Einträge hinzufügen" : "Neue Liste") + "</h2>";
+
+    if (!m.append) {
+      h += '<label class="field" for="imp-title">Name der Liste<input type="text" id="imp-title" data-imp="title" placeholder="Unité 4 – Verben" value="' + esc(m.title) + '"></label>';
+      h += '<div class="stack" style="gap:6px"><span class="field" style="font-weight:700;font-size:.9rem">Sprache</span><div class="seg">';
+      ["fr", "en"].forEach(function (l) { h += '<button data-act="imp-lang" data-v="' + l + '" aria-pressed="' + (m.lang === l) + '">' + LANG[l].name + "</button>"; });
+      h += '</div></div><div class="stack" style="gap:6px"><span class="field" style="font-weight:700;font-size:.9rem">Was lernst du?</span><div class="seg">';
+      [["verbs", "Verben mit Konjugation"], ["words", "Wörter"]].forEach(function (k) { h += '<button data-act="imp-kind" data-v="' + k[0] + '" aria-pressed="' + (m.kind === k[0]) + '">' + k[1] + "</button>"; });
+      h += "</div></div>";
+    } else {
+      h += '<p class="muted">Neue Einträge kommen in die Liste „' + esc(m.title) + "“. Gleiche Einträge werden ersetzt.</p>";
+    }
+    if (m.kind === "verbs") {
+      h += '<div class="stack" style="gap:6px"><span style="font-weight:700;font-size:.9rem">Zeitformen</span><div class="checks">';
+      L.tenses.forEach(function (t, i) {
+        h += '<label for="tn' + i + '"><input type="checkbox" id="tn' + i + '" data-act="imp-tense" data-v="' + esc(t) + '"' + (m.tenses.indexOf(t) !== -1 ? " checked" : "") + ">" + esc(t) + (t === "Stammformen" ? " (go – went – gone)" : "") + "</label>";
+      });
+      h += "</div></div>";
+    }
+
+    if (!m.preview) {
+      if (canPhoto) {
+        h += '<div class="drop" id="drop"><strong>Foto deiner Liste</strong><p class="muted small">Am besten gerade von oben, gut beleuchtet. Bis zu ' + S.imgLimits.maxCount + " Fotos.</p>";
+        h += '<label class="btn" for="imp-file" style="border:1.5px solid var(--blue);border-radius:6px;padding:9px 14px;color:var(--blue);cursor:pointer">Foto auswählen</label>';
+        h += '<input type="file" id="imp-file" accept="' + esc(S.imgLimits.mediaTypes.join(",")) + '" multiple class="sr">';
+        if (m.files.length) {
+          h += '<div class="thumbs">';
+          m.files.forEach(function (f, i) { h += '<figure><img src="' + f.url + '" alt="Foto ' + (i + 1) + '"><button data-act="rmfile" data-i="' + i + '" aria-label="Foto entfernen">✕</button></figure>'; });
+          h += "</div>";
+        }
+        h += "</div>";
+      }
+      h += '<label class="field" for="imp-text">' + (canPhoto ? "Oder Wörter eintippen" : "Wörter eintippen") + '<textarea id="imp-text" data-imp="text" placeholder="' + esc(placeholderFor(m)) + '">' + esc(m.text) + "</textarea></label>";
+      h += '<p class="muted small">' + esc(helpFor(m, !!S.sample)) + "</p>";
+      if (m.error) h += '<p class="note err">' + esc(m.error) + "</p>";
+      if (m.busy) h += '<div class="status"><div class="spinner" aria-hidden="true"></div><span>' + esc(m.status || "Claude liest die Liste …") + "</span></div>";
+      else {
+        h += '<div class="row">';
+        if (S.sample) h += '<button class="primary" data-act="extract">' + (m.files.length ? "Foto auslesen" : "Liste erstellen lassen") + "</button>";
+        h += '<button data-act="manual">' + (S.sample ? "Ohne Claude übernehmen" : "Übernehmen") + "</button></div>";
+      }
+    } else {
+      h += previewView(m);
+    }
+    h += "</div>";
+    return h;
+  }
+  function placeholderFor(m) {
+    if (m.kind === "words") return m.lang === "fr" ? "la maison = das Haus\nle chien = der Hund" : "the house = das Haus\nto borrow = ausleihen";
+    if (S.sample) return m.lang === "fr" ? "prendre\naller = gehen\nvenir" : "go\nsee = sehen\ntake";
+    return m.lang === "fr" ? "prendre = nehmen | prends, prends, prend, prenons, prenez, prennent" : "go = gehen | went, gone";
+  }
+  function helpFor(m, hasClaude) {
+    if (m.kind === "words") return "Eine Zeile pro Wort, Fremdwort und Deutsch mit = getrennt.";
+    if (hasClaude) return "Eine Zeile pro Verb. Die Bedeutung kannst du weglassen, Claude ergänzt sie und konjugiert die gewählten Zeitformen. Vergleiche das Ergebnis mit deinem Heft.";
+    return "Eine Zeile pro Verb: Infinitiv = Bedeutung | Formen mit Komma getrennt (für die erste gewählte Zeitform).";
+  }
+
+  function previewView(m) {
+    var h = '<div class="spread"><h3>Vorschau: ' + m.preview.length + " Einträge</h3><span class=\"muted small\">Prüfe alles und korrigiere direkt hier.</span></div>";
+    if (m.kind === "words") {
+      h += '<div class="stack" style="gap:8px">';
+      m.preview.forEach(function (it, i) {
+        h += '<div class="pvhead"><input type="text" id="pv' + i + 'q" data-pv="' + i + '.q" aria-label="Fremdwort" value="' + esc(it.q) + '"><input type="text" id="pv' + i + 'a" data-pv="' + i + '.a" aria-label="Deutsch" value="' + esc(it.a) + '"><button class="quiet" data-act="pvdel" data-i="' + i + '" aria-label="Entfernen">✕</button></div>';
+      });
+      h += "</div>";
+    } else {
+      m.preview.forEach(function (it, i) {
+        h += '<div class="pvitem"><div class="pvhead"><input type="text" id="pv' + i + 'inf" data-pv="' + i + '.inf" aria-label="Infinitiv" style="font-family:var(--font-word);font-weight:600" value="' + esc(it.inf) + '"><input type="text" id="pv' + i + 'de" data-pv="' + i + '.de" aria-label="Bedeutung" value="' + esc(it.de) + '"><button class="quiet" data-act="pvdel" data-i="' + i + '" aria-label="Verb entfernen">✕</button></div>';
+        if (it.tables && it.tables.length) {
+          h += '<div class="pvtables">';
+          it.tables.forEach(function (t, ti) {
+            h += '<div><p class="eyebrow" style="color:var(--blue);margin-bottom:4px">' + esc(t.name) + '</p><div class="conj">';
+            t.forms.forEach(function (f, fi) {
+              h += '<label class="lab" for="pv' + i + "t" + ti + "f" + fi + '">' + esc(t.labels[fi]) + '</label><input type="text" id="pv' + i + "t" + ti + "f" + fi + '" data-pv="' + i + "." + ti + "." + fi + '" value="' + esc(f) + '">';
+            });
+            h += "</div></div>";
+          });
+          h += "</div>";
+        }
+        h += "</div>";
+      });
+    }
+    if (m.error) h += '<p class="note err">' + esc(m.error) + "</p>";
+    h += '<div class="row"><button class="primary" data-act="save"' + (m.busy ? " disabled" : "") + ">" + (m.busy ? "Wird gespeichert …" : "Liste speichern") + '</button><button data-act="pvback">Neu beginnen</button></div>';
+    return h;
+  }
+
+  function buildPrompt(m, withImages) {
+    var L = LANG[m.lang];
+    var p = "Du hilfst einer Schülerin oder einem Schüler in der Schweiz (deutschsprachig), " + L.name + " zu lernen.\n";
+    if (withImages) p += "Die Bilder zeigen eine Seite aus dem Schulheft oder Lehrmittel mit einer Liste. Lies alle Einträge der Liste aus.\n";
+    else p += "Unten steht eine eingetippte Liste. Übernimm alle Einträge.\n";
+    if (m.kind === "words") {
+      p += "Es sind Wörter/Ausdrücke. Antworte NUR mit JSON in genau diesem Format:\n" +
+        '{"items":[{"q":"' + (m.lang === "fr" ? "la maison" : "the house") + '","a":"das Haus"}]}\n' +
+        "q = Wort in " + L.name + " (mit Artikel, falls er dasteht), a = deutsche Bedeutung. " +
+        "Übernimm die Schreibweise genau, inklusive Akzente. Fehlt die deutsche Bedeutung, ergänze eine kurze, passende. Lass Überschriften, Seitenzahlen und Übungsanweisungen weg.";
+      return p;
+    }
+    var tenses = m.tenses.length ? m.tenses : DEFAULT_TENSE[m.lang];
+    var ex = m.lang === "fr"
+      ? '{"items":[{"inf":"prendre","de":"nehmen","tables":[{"name":"Présent","labels":["je","tu","il/elle/on","nous","vous","ils/elles"],"forms":["prends","prends","prend","prenons","prenez","prennent"]}]}]}'
+      : '{"items":[{"inf":"go","de":"gehen","tables":[{"name":"Stammformen","labels":["Simple past","Past participle"],"forms":["went","gone"]}]}]}';
+    p += "Es sind Verben. Antworte NUR mit JSON in genau diesem Format:\n" + ex + "\n";
+    p += "Für JEDES Verb genau eine table pro Zeitform, in dieser Reihenfolge: " + tenses.join(", ") + ".\n";
+    p += "Labels: ";
+    if (m.lang === "fr") p += 'normale Zeitformen ["je","tu","il/elle/on","nous","vous","ils/elles"]; Impératif ["tu","nous","vous"]. Passé composé mit Hilfsverb ("ai pris", "suis allé(e)"). Subjonctif ohne "que".\n';
+    else p += 'Stammformen ["Simple past","Past participle"]; alle anderen ["I","you","he/she/it","we","you","they"]. Present perfect mit have/has, Will-future mit will, Present progressive mit am/are/is.\n';
+    p += "forms immer OHNE Pronomen. inf = Infinitiv ohne \"to\". de = kurze deutsche Bedeutung.\n";
+    p += "Wenn Formen in der Vorlage stehen, übernimm sie genau so. Sonst konjugiere korrekt nach Schulgrammatik. Übernimm die Schreibweise genau, inklusive Akzente. Lass Überschriften, Seitenzahlen und Übungsanweisungen weg.";
+    return p;
+  }
+
+  function cleanItems(res, kind) {
+    var arr = res && Array.isArray(res.items) ? res.items : Array.isArray(res) ? res : [];
+    var out = [];
+    arr.forEach(function (it) {
+      if (!it || typeof it !== "object") return;
+      if (kind === "words") {
+        var q = String(it.q || "").trim(), a = String(it.a || "").trim();
+        if (q) out.push({ q: q, a: a });
+      } else {
+        var inf = String(it.inf || "").trim(); if (!inf) return;
+        var tables = [];
+        (Array.isArray(it.tables) ? it.tables : []).forEach(function (t) {
+          if (!t || !Array.isArray(t.forms)) return;
+          var labels = Array.isArray(t.labels) ? t.labels.map(String) : [];
+          var forms = t.forms.map(function (f) { return String(f || "").trim(); });
+          while (labels.length < forms.length) labels.push(String(labels.length + 1));
+          tables.push({ name: String(t.name || "Formen"), labels: labels.slice(0, forms.length), forms: forms });
+        });
+        out.push({ inf: inf, de: String(it.de || "").trim(), tables: tables });
+      }
+    });
+    return out;
+  }
+
+  function manualParse(m) {
+    var lines = m.text.split(/\n+/).map(function (l) { return l.trim(); }).filter(Boolean);
+    var out = [];
+    var tense = (m.tenses[0] || DEFAULT_TENSE[m.lang][0]);
+    lines.forEach(function (line) {
+      var parts = line.split("|"), main = parts[0];
+      var mm = main.split(/\s*(?:=|\t| – | - |:)\s*/);
+      var left = (mm[0] || "").trim(), right = mm.slice(1).join(" ").trim();
+      if (!left) return;
+      if (m.kind === "words") { out.push({ q: left, a: right }); return; }
+      var it = { inf: left, de: right, tables: [] };
+      if (parts[1]) {
+        var forms = parts[1].split(/[,;]/).map(function (f) { return f.trim(); }).filter(Boolean);
+        var labels = tense === "Stammformen" ? ["Simple past", "Past participle"] : tense === "Impératif" ? ["tu", "nous", "vous"] : LANG[m.lang].pron;
+        if (forms.length) it.tables.push({ name: tense, labels: labels.slice(0, forms.length).concat(forms.slice(labels.length).map(function (_, i) { return String(labels.length + i + 1); })), forms: forms });
+      }
+      out.push(it);
+    });
+    return out;
+  }
+
+  function downscale(file) {
+    return new Promise(function (resolve) {
+      try {
+        var url = URL.createObjectURL(file), img = new Image();
+        img.onload = function () {
+          var max = 1800, w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+          if (k === 1 && file.size < 3e6) { resolve(file); return; }
+          var c = document.createElement("canvas"); c.width = Math.round(w * k); c.height = Math.round(h * k);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (b) { resolve(b || file); }, "image/jpeg", 0.88);
+        };
+        img.onerror = function () { resolve(file); };
+        img.src = url;
+      } catch (e) { resolve(file); }
+    });
+  }
+
+  function sampleError(e) {
+    var c = e && e.code;
+    if (c === "not_granted") return "Du hast der App nicht erlaubt, Claude zu fragen. Tippe die Wörter ein und wähle „Ohne Claude übernehmen“.";
+    if (c === "rate_limited") return "Gerade zu viele Anfragen. Warte einen Moment und versuch es nochmals.";
+    if (c === "invalid_json") return "Claude konnte daraus keine Liste machen. Versuch es mit einem schärferen Foto oder tippe die Wörter ein.";
+    if (c === "image_rejected") return "Das Foto konnte nicht gelesen werden. Versuch ein JPG oder PNG oder weniger Fotos auf einmal.";
+    if (c === "images_unavailable") return "Fotos gehen in dieser Ansicht nicht. Tippe die Wörter ein.";
+    if (c === "sampling_disabled") return "Claude ist für dein Konto gerade nicht verfügbar. Tippe die Wörter ein und wähle „Ohne Claude übernehmen“.";
+    if (c === "cancelled") return "Abgebrochen.";
+    return "Das hat nicht geklappt. Versuch es nochmals.";
+  }
+
+  async function runExtract() {
+    var m = S.imp;
+    if (!m.files.length && !m.text.trim()) { m.error = "Wähle ein Foto oder tippe mindestens ein Wort ein."; render(); return; }
+    if (m.kind === "verbs" && !m.tenses.length) { m.error = "Wähle mindestens eine Zeitform."; render(); return; }
+    m.error = ""; m.busy = true; m.status = m.files.length ? "Claude liest das Foto …" : "Claude erstellt die Liste …"; render();
+    try {
+      var withImages = m.files.length > 0;
+      var prompt = buildPrompt(m, withImages);
+      if (m.text.trim()) prompt += "\n\n" + (withImages ? "Zusätzlich eingetippt:" : "Liste:") + "\n" + m.text.trim();
+      var opts = { modelTier: "default", onText: function (o) {
+        var n = (String(o.text).match(/"(inf|q)"\s*:/g) || []).length;
+        if (n && S.view.name === "import") { m.status = n + (n === 1 ? " Eintrag" : " Einträge") + " gefunden …"; var st = app.querySelector(".status span"); if (st) st.textContent = m.status; }
+      } };
+      if (withImages) opts.images = await Promise.all(m.files.map(function (f) { return downscale(f.file); }));
+      var res = await S.sample.json(prompt, opts);
+      var items = cleanItems(res, m.kind);
+      if (!items.length) { m.error = "Auf dem Foto wurde keine Liste gefunden. Versuch es mit einem schärferen Foto."; }
+      else m.preview = items;
+    } catch (e) { m.error = sampleError(e); }
+    m.busy = false;
+    if (S.view.name === "import") render();
+  }
+
+  async function saveImport() {
+    var m = S.imp;
+    syncPreviewFromDom();
+    var items = m.kind === "words"
+      ? m.preview.filter(function (it) { return it.q.trim(); })
+      : m.preview.filter(function (it) { return it.inf.trim(); });
+    if (!m.append && !m.title.trim()) { m.error = "Gib der Liste oben einen Namen."; render(); return; }
+    if (!items.length) { m.error = "Die Liste ist leer."; render(); return; }
+    var now = Date.now(), id, doc;
+    if (m.append) {
+      var l = findList(m.append); if (!l) { m.error = "Diese Liste gibt es nicht mehr."; render(); return; }
+      var merged = (l.items || []).slice(), idx = {};
+      merged.forEach(function (it, i) { idx[norm(itemKey(it))] = i; });
+      items.forEach(function (it) { var k = norm(itemKey(it)); if (k in idx) merged[idx[k]] = it; else { idx[k] = merged.length; merged.push(it); } });
+      id = l.id; doc = { title: l.title, lang: l.lang, kind: l.kind, items: merged, createdAt: l.createdAt || now, updatedAt: now };
+      if (l.example) doc.example = true;
+    } else {
+      id = newId(); doc = { title: m.title.trim(), lang: m.lang, kind: m.kind, items: items, createdAt: now, updatedAt: now };
+    }
+    m.busy = true; m.error = ""; render();
+    try {
+      await publishLists(withDoc(id, doc));
+      S.imp = null;
+      go({ name: "list", id: id });
+    } catch (e) {
+      m.busy = false; m.error = dbError(e); render();
+    }
+  }
+  function withDoc(id, doc) {
+    var copy = Object.assign({ id: id }, doc), found = false;
+    var next = S.lists.map(function (l) { if (l.id === id) { found = true; return copy; } return l; });
+    if (!found) next.push(copy);
+    return next;
+  }
+  async function publishLists(next) {
+    if (!S.art) throw { code: "capability_disabled" };
+    await S.art.publish({ "lists.json": JSON.stringify({ lists: next }) });
+    S.lists = next; sortLists();
+  }
+  function dbError(e) {
+    var c = e && e.code;
+    if (c === "capability_disabled" || c === "not_writer" || c === "not_granted") return "Hier kann nicht gespeichert werden, zum Beispiel weil die App öffentlich geteilt ist. Schick die Liste Claude im Chat, dann wird sie für alle eingebaut.";
+    if (c === "conflict") return "Die App wurde inzwischen geändert und lädt neu. Versuch es danach nochmals.";
+    return "Speichern hat nicht geklappt. Prüfe die Verbindung und versuch es nochmals.";
+  }
+  function syncPreviewFromDom() {
+    var m = S.imp; if (!m || !m.preview) return;
+    app.querySelectorAll("[data-pv]").forEach(function (el) { setPv(el.getAttribute("data-pv"), el.value); });
+  }
+  function setPv(path, val) {
+    var m = S.imp, p = path.split("."), it = m.preview[+p[0]]; if (!it) return;
+    if (p.length === 2) it[p[1]] = val;
+    else if (p.length === 3) { var t = it.tables[+p[1]]; if (t) t.forms[+p[2]] = val; }
+  }
+
+  async function writeList(id, doc) {
+    try { await publishLists(withDoc(id, doc)); return true; }
+    catch (e) { S.flash = { type: "err", text: dbError(e) }; return false; }
+  }
+
+  /* ---------- Ereignisse ---------- */
+  app.addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-act]"); if (!b || b.tagName === "SELECT" || (b.tagName === "INPUT" && b.type === "checkbox")) return;
+    var act = b.getAttribute("data-act"), s = S.session;
+    switch (act) {
+      case "home": S.imp = null; go({ name: "home" }); break;
+      case "filter": S.filter = b.getAttribute("data-v"); render(); break;
+      case "open": go({ name: "list", id: b.getAttribute("data-id") }); break;
+      case "new": openImport(null); break;
+      case "append": openImport(b.getAttribute("data-id")); break;
+      case "backlist2": var aid = S.imp && S.imp.append; S.imp = null; go({ name: "list", id: aid }); break;
+      case "start": startSession(S.view.id, b.getAttribute("data-mode")); break;
+      case "quit": case "backlist": go({ name: "list", id: s.listId }); break;
+      case "again": startSession(s.listId, s.mode); break;
+      case "speak": speak(b.getAttribute("data-text"), b.getAttribute("data-lang")); break;
+      case "flip": s.q.flipped = !s.q.flipped; render(); break;
+      case "cardres": finishAnswer(b.getAttribute("data-r"), ""); advance(); break;
+      case "mc":
+        if (s.answered) break;
+        var i = +b.getAttribute("data-i"), opt = s.q.options[i];
+        s.picked = i; finishAnswer(norm(opt) === norm(s.q.answer) ? "ok" : "wrong", opt); render(); break;
+      case "next": advance(); break;
+      case "override":
+        var last = s.mistakes.pop();
+        if (last) { s.right += last.result === "accent" ? 0.5 : 1; var p = getP(s.listId, itemKey(s.q.item)); setP(s.listId, itemKey(s.q.item), { b: Math.min(5, p.b + 1), r: p.r + 1, w: Math.max(0, p.w - (last.result === "wrong" ? 1 : 0)) }); }
+        s.feedback = "ok"; render(); break;
+      case "char":
+        var inp = document.getElementById("answer");
+        if (inp) { var st0 = inp.selectionStart || inp.value.length, en = inp.selectionEnd || st0; inp.value = inp.value.slice(0, st0) + b.getAttribute("data-c") + inp.value.slice(en); inp.focus(); inp.setSelectionRange(st0 + 1, st0 + 1); }
+        break;
+      case "checktable": checkTable(); break;
+      case "resetprog": delete S.prog[b.getAttribute("data-id")]; store.set("verbheft.prog.v1", S.prog); render(); break;
+      case "dellist": S.confirmDel = b.getAttribute("data-id"); render(); break;
+      case "delcancel": S.confirmDel = null; render(); break;
+      case "delconfirm":
+        var did = b.getAttribute("data-id");
+        publishLists(S.lists.filter(function (l) { return l.id !== did; })).then(function () {
+          S.flash = { type: "ok", text: "Liste gelöscht." }; go({ name: "home" });
+        }, function (e) { S.flash = { type: "err", text: dbError(e) }; go({ name: "home" }); });
+        break;
+      case "delitem":
+        var l = findList(b.getAttribute("data-id")); if (!l) break;
+        var items = l.items.slice(); items.splice(+b.getAttribute("data-i"), 1);
+        var d = { title: l.title, lang: l.lang, kind: l.kind, items: items, createdAt: l.createdAt || Date.now(), updatedAt: Date.now() };
+        if (l.example) d.example = true;
+        writeList(l.id, d).then(render); break;
+      case "imp-lang": S.imp.lang = b.getAttribute("data-v"); S.imp.tenses = DEFAULT_TENSE[S.imp.lang].slice(); render(); break;
+      case "imp-kind": S.imp.kind = b.getAttribute("data-v"); render(); break;
+      case "rmfile": var f = S.imp.files.splice(+b.getAttribute("data-i"), 1)[0]; try { URL.revokeObjectURL(f.url); } catch (e) { } render(); break;
+      case "extract": runExtract(); break;
+      case "manual":
+        var m = S.imp;
+        if (m.kind === "verbs" && !m.tenses.length) m.tenses = DEFAULT_TENSE[m.lang].slice();
+        var parsed = manualParse(m);
+        if (!parsed.length) { m.error = "Tippe mindestens ein Wort ein, eine Zeile pro Eintrag."; render(); break; }
+        m.error = ""; m.preview = parsed; render(); break;
+      case "pvdel": syncPreviewFromDom(); S.imp.preview.splice(+b.getAttribute("data-i"), 1); render(); break;
+      case "pvback": S.imp.preview = null; S.imp.error = ""; render(); break;
+      case "save": saveImport(); break;
+    }
+  });
+
+  app.addEventListener("change", function (ev) {
+    var t = ev.target;
+    if (t.id === "dirsel") { S.settings.dir = t.value; store.set("verbheft.settings.v1", S.settings); return; }
+    if (t.getAttribute("data-act") === "imp-tense") {
+      var v = t.getAttribute("data-v"), arr = S.imp.tenses, i = arr.indexOf(v);
+      if (t.checked && i === -1) arr.push(v); else if (!t.checked && i !== -1) arr.splice(i, 1);
+      var order = LANG[S.imp.lang].tenses; arr.sort(function (a, b) { return order.indexOf(a) - order.indexOf(b); });
+      return;
+    }
+    if (t.id === "imp-file") { addFiles(t.files); }
+  });
+  app.addEventListener("input", function (ev) {
+    var t = ev.target;
+    if (t.hasAttribute("data-imp") && S.imp) S.imp[t.getAttribute("data-imp")] = t.value;
+    if (t.hasAttribute("data-pv") && S.imp && S.imp.preview) setPv(t.getAttribute("data-pv"), t.value);
+  });
+  app.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var f = ev.target.getAttribute("data-form");
+    if (f === "write") checkWrite();
+    if (f === "table") checkTable();
+  });
+  app.addEventListener("dragover", function (ev) { var d = ev.target.closest && ev.target.closest("#drop"); if (d) { ev.preventDefault(); d.classList.add("over"); } });
+  app.addEventListener("dragleave", function (ev) { var d = ev.target.closest && ev.target.closest("#drop"); if (d) d.classList.remove("over"); });
+  app.addEventListener("drop", function (ev) { var d = ev.target.closest && ev.target.closest("#drop"); if (d) { ev.preventDefault(); addFiles(ev.dataTransfer.files); } });
+
+  function addFiles(list) {
+    var m = S.imp; if (!m || !S.imgLimits) return;
+    var lim = S.imgLimits, msg = "";
+    Array.prototype.forEach.call(list || [], function (file) {
+      if (m.files.length >= lim.maxCount) { msg = "Höchstens " + lim.maxCount + " Fotos auf einmal."; return; }
+      if (lim.mediaTypes.indexOf(file.type) === -1) { msg = "Dieses Dateiformat geht nicht. Nimm ein JPG oder PNG."; return; }
+      if (file.size > lim.maxInputBytes) { msg = "Ein Foto ist zu gross."; return; }
+      m.files.push({ file: file, url: URL.createObjectURL(file) });
+    });
+    m.error = msg; render();
+  }
+
+  function checkWrite() {
+    var s = S.session; if (!s || s.answered) { if (s && s.answered) advance(); return; }
+    var inp = document.getElementById("answer"), val = inp ? inp.value : "";
+    if (!val.trim()) { if (s.mode !== "test") { inp && inp.focus(); return; } }
+    var q = s.q;
+    var r = grade(val, q.answer, q.kind === "form" && q.pronoun ? { label: q.label } : null);
+    s.given = val;
+    finishAnswer(r, val);
+    if (s.mode === "test") { s.given = ""; advance(); return; }
+    s.feedback = r; render();
+  }
+  function checkTable() {
+    var s = S.session, q = s && s.q; if (!q || q.kind !== "table") return;
+    if (q.result) { advance(); return; }
+    var t = q.tables[q.t];
+    q.given = t.forms.map(function (_, i) { var el = document.getElementById("cf" + i); return el ? el.value : ""; });
+    q.result = t.forms.map(function (f, i) { return grade(q.given[i], f, isPronounTable(t.labels[i], findList(s.listId).lang) ? { label: t.labels[i] } : null); });
+    var res = q.result.indexOf("wrong") !== -1 ? "wrong" : q.result.indexOf("accent") !== -1 ? "accent" : "ok";
+    finishAnswer(res, q.given.filter(Boolean).join(", "));
+    render();
+  }
+
+  document.addEventListener("keydown", function (ev) {
+    if (S.view.name !== "study" || !S.session) return;
+    var tag = (ev.target.tagName || "").toLowerCase();
+    var q = S.session.q;
+    if (q && q.kind === "card" && ev.key === " " && tag !== "input" && tag !== "textarea") { ev.preventDefault(); q.flipped = !q.flipped; render(); }
+    else if (ev.key === "Enter" && S.session.answered && tag !== "button" && tag !== "input") { ev.preventDefault(); advance(); }
+    else if (S.session.mode === "mc" && q && q.options && !S.session.answered && /^[1-4]$/.test(ev.key)) {
+      var btn = app.querySelector('[data-act="mc"][data-i="' + (+ev.key - 1) + '"]'); if (btn) btn.click();
+    }
+  });
+
+  function speak(text, lang) {
+    try {
+      window.speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(text); u.lang = (LANG[lang] || LANG.fr).speech; u.rate = 0.9;
+      window.speechSynthesis.speak(u);
+    } catch (e) { }
+  }
+
+  function afterRender() {
+    var s = S.session;
+    if (S.view.name === "study" && s) {
+      if (s.q && s.q.kind !== "card" && s.q.kind !== "table" && !s.answered && !(s.mode === "mc" && s.q.options)) { var a = document.getElementById("answer"); if (a) a.focus(); }
+      else if (s.q && s.q.kind === "table" && !s.q.result) { var c = document.getElementById("cf0"); if (c) c.focus(); }
+      else if (s.answered) { var n = document.getElementById("nextbtn"); if (n) n.focus(); }
+    }
+  }
+
+  /* ---------- Start ---------- */
+  function sortLists() {
+    S.lists.sort(function (a, b) {
+      if (!!a.example !== !!b.example) return a.example ? 1 : -1;
+      return (b.updatedAt || b.createdAt || 0) - (a.updatedAt || a.createdAt || 0);
+    });
+  }
+
+  render();
+
+  (async function init() {
+    try {
+      var r = await fetch("lists.json", { cache: "no-cache" });
+      if (!r.ok) throw new Error("http " + r.status);
+      var data = await r.json();
+      S.lists = (data && Array.isArray(data.lists) ? data.lists : []).filter(function (l) { return l && l.id; });
+      sortLists(); S.dbState = "ready";
+    } catch (e) { S.dbState = "off"; }
+    render();
+
+    if (!window.claude || typeof window.claude.use !== "function") return;
+    try {
+      var user = await claude.use("user");
+      var edit = user ? await user.canEdit() : false;
+      if (edit) {
+        S.art = await claude.use("artifact");
+        S.canWrite = !!S.art;
+        if (S.view.name === "home" || S.view.name === "list") render();
+      }
+    } catch (e) { }
+    if (!S.canWrite) return;
+    try {
+      var sample = await claude.use("sample");
+      if (sample) {
+        S.sample = sample;
+        var lim = await sample.limits().catch(function () { return null; });
+        S.imgLimits = lim && lim.images ? lim.images : null;
+        if (S.view.name === "import") render();
+      }
+    } catch (e) { }
+  })();
+})();
+</script>
+
+<script>
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", function () { navigator.serviceWorker.register("sw.js").catch(function () {}); });
+}
+</script>
+</body>
+</html>
