@@ -1,1 +1,954 @@
-{"lists": [{"id": "ex-fr-verben", "title": "Wichtige Verben – Présent und Passé composé", "lang": "fr", "kind": "verbs", "items": [{"inf": "être", "de": "sein", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["suis", "es", "est", "sommes", "êtes", "sont"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["ai été", "as été", "a été", "avons été", "avez été", "ont été"]}]}, {"inf": "avoir", "de": "haben", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["ai", "as", "a", "avons", "avez", "ont"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["ai eu", "as eu", "a eu", "avons eu", "avez eu", "ont eu"]}]}, {"inf": "aller", "de": "gehen", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["vais", "vas", "va", "allons", "allez", "vont"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["suis allé(e)", "es allé(e)", "est allé(e)", "sommes allé(e)s", "êtes allé(e)(s)", "sont allé(e)s"]}]}, {"inf": "faire", "de": "machen", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["fais", "fais", "fait", "faisons", "faites", "font"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["ai fait", "as fait", "a fait", "avons fait", "avez fait", "ont fait"]}]}, {"inf": "prendre", "de": "nehmen", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["prends", "prends", "prend", "prenons", "prenez", "prennent"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["ai pris", "as pris", "a pris", "avons pris", "avez pris", "ont pris"]}]}, {"inf": "venir", "de": "kommen", "tables": [{"name": "Présent", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["viens", "viens", "vient", "venons", "venez", "viennent"]}, {"name": "Passé composé", "labels": ["je", "tu", "il/elle/on", "nous", "vous", "ils/elles"], "forms": ["suis venu(e)", "es venu(e)", "est venu(e)", "sommes venu(e)s", "êtes venu(e)(s)", "sont venu(e)s"]}]}], "example": true, "createdAt": 1792943995000, "updatedAt": 1792943995000}, {"id": "ex-en-irregular", "title": "Irregular verbs", "lang": "en", "kind": "verbs", "items": [{"inf": "go", "de": "gehen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["went", "gone"]}]}, {"inf": "see", "de": "sehen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["saw", "seen"]}]}, {"inf": "take", "de": "nehmen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["took", "taken"]}]}, {"inf": "write", "de": "schreiben", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["wrote", "written"]}]}, {"inf": "buy", "de": "kaufen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["bought", "bought"]}]}, {"inf": "bring", "de": "bringen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["brought", "brought"]}]}, {"inf": "think", "de": "denken", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["thought", "thought"]}]}, {"inf": "eat", "de": "essen", "tables": [{"name": "Stammformen", "labels": ["Simple past", "Past participle"], "forms": ["ate", "eaten"]}]}], "example": true, "createdAt": 1792943994999, "updatedAt": 1792943994999}, {"id": "ex-fr-woerter", "title": "Wörter: Alltag", "lang": "fr", "kind": "words", "items": [{"q": "la maison", "a": "das Haus"}, {"q": "le chien", "a": "der Hund"}, {"q": "l'école", "a": "die Schule"}, {"q": "le livre", "a": "das Buch"}, {"q": "la ville", "a": "die Stadt"}, {"q": "le petit-déjeuner", "a": "das Frühstück"}, {"q": "souvent", "a": "oft"}, {"q": "toujours", "a": "immer"}], "example": true, "createdAt": 1792943994998, "updatedAt": 1792943994998}]}
+{
+ "lists": [
+  {
+   "id": "en-13-fourth-industrial-revolution",
+   "title": "1.3 The Fourth Industrial Revolution",
+   "lang": "en",
+   "kind": "words",
+   "items": [
+    {
+     "q": "to occur",
+     "a": "stattfinden"
+    },
+    {
+     "q": "fusion of technologies",
+     "a": "Verschmelzung von Technologien"
+    },
+    {
+     "q": "to blur the line",
+     "a": "die Grenze verschwimmen lassen"
+    },
+    {
+     "q": "sphere",
+     "a": "Bereich"
+    },
+    {
+     "q": "founder",
+     "a": "Gründer/-in"
+    },
+    {
+     "q": "concept",
+     "a": "Idee"
+    },
+    {
+     "q": "artificial intelligence (AI)",
+     "a": "künstliche Intelligenz"
+    },
+    {
+     "q": "autonomous vehicle",
+     "a": "autonomes Fahrzeug"
+    },
+    {
+     "q": "to interact with sb",
+     "a": "mit jmdm. kommunizieren"
+    },
+    {
+     "q": "to witness sth",
+     "a": "etw. beobachten"
+    },
+    {
+     "q": "hitherto",
+     "a": "bisher"
+    },
+    {
+     "q": "to disrupt sth",
+     "a": "etw. zerrütten; etw. (empfindlich) stören"
+    },
+    {
+     "q": "pace of change",
+     "a": "Tempo der Veränderung"
+    },
+    {
+     "q": "to struggle to do sth",
+     "a": "Mühe haben, etw. zu tun"
+    },
+    {
+     "q": "vast",
+     "a": "riesig"
+    },
+    {
+     "q": "voice assistant",
+     "a": "Sprachassistent/-in"
+    },
+    {
+     "q": "data",
+     "a": "Daten"
+    },
+    {
+     "q": "automation",
+     "a": "Automatisierung"
+    },
+    {
+     "q": "repetitive",
+     "a": "monoton"
+    },
+    {
+     "q": "unskilled",
+     "a": "ungelernt"
+    },
+    {
+     "q": "low-skilled",
+     "a": "geringqualifiziert"
+    },
+    {
+     "q": "in fact",
+     "a": "genaugenommen"
+    },
+    {
+     "q": "research",
+     "a": "Untersuchung"
+    },
+    {
+     "q": "to require sth",
+     "a": "etwas benötigen"
+    },
+    {
+     "q": "human interaction",
+     "a": "menschliche Interaktion"
+    },
+    {
+     "q": "lawyer",
+     "a": "Rechtsanwalt; Rechtsanwältin"
+    },
+    {
+     "q": "to be affected (by sth)",
+     "a": "(von etw.) betroffen sein"
+    },
+    {
+     "q": "to have an effect on sth/sb",
+     "a": "etw./jmd. beeinflussen"
+    },
+    {
+     "q": "effect",
+     "a": "Wirkung"
+    },
+    {
+     "q": "manual dexterity",
+     "a": "handwerkliches Geschick"
+    },
+    {
+     "q": "to involve sth",
+     "a": "etw. benötigen; etw. beinhalten"
+    },
+    {
+     "q": "plumber",
+     "a": "Klempner/-in"
+    },
+    {
+     "q": "to emerge",
+     "a": "entstehen"
+    },
+    {
+     "q": "to deal (dealt, dealt) with sth",
+     "a": "mit etw. umgehen"
+    },
+    {
+     "q": "to retrain",
+     "a": "umlernen; umschulen"
+    },
+    {
+     "q": "to acquire new skills",
+     "a": "neue Fähigkeiten erwerben"
+    },
+    {
+     "q": "employable",
+     "a": "vermittelbar"
+    },
+    {
+     "q": "adaptability",
+     "a": "Anpassungsfähigkeit"
+    },
+    {
+     "q": "to be key for sth",
+     "a": "entscheidend für etwas sein"
+    },
+    {
+     "q": "initiative",
+     "a": "Initiative"
+    },
+    {
+     "q": "resilience",
+     "a": "Belastbarkeit; Durchhaltevermögen"
+    }
+   ],
+   "createdAt": 1793271119553,
+   "updatedAt": 1793271119553
+  },
+  {
+   "id": "en-13-changing-workplace",
+   "title": "1.3 The changing workplace",
+   "lang": "en",
+   "kind": "words",
+   "items": [
+    {
+     "q": "exception",
+     "a": "Ausnahme"
+    },
+    {
+     "q": "with the exception of sth",
+     "a": "mit Ausnahme von etw."
+    },
+    {
+     "q": "Supreme Court Justice",
+     "a": "Richter/-in am Supreme Court"
+    },
+    {
+     "q": "efforts",
+     "a": "Bemühungen; Bestreben"
+    },
+    {
+     "q": "gender equality",
+     "a": "Gleichstellung der Geschlechter"
+    },
+    {
+     "q": "to earn",
+     "a": "verdienen"
+    },
+    {
+     "q": "colleague",
+     "a": "Kollege; Kollegin"
+    },
+    {
+     "q": "gender pay gap",
+     "a": "geschlechtsspezifisches Lohngefälle"
+    },
+    {
+     "q": "workplace",
+     "a": "Arbeitsplatz"
+    },
+    {
+     "q": "double shift",
+     "a": "Doppelschicht"
+    },
+    {
+     "q": "household chores",
+     "a": "Hausarbeit"
+    },
+    {
+     "q": "childcare",
+     "a": "Kinderbetreuung"
+    },
+    {
+     "q": "CEO (Chief Executive Officer)",
+     "a": "Geschäftsführer/-in"
+    },
+    {
+     "q": "working hours",
+     "a": "Arbeitszeit"
+    },
+    {
+     "q": "to work part-time",
+     "a": "einer Teilzeitbeschäftigung nachgehen"
+    },
+    {
+     "q": "perk",
+     "a": "Vorteil; Zusatzleistung"
+    },
+    {
+     "q": "onsite childcare",
+     "a": "Kinderbetreuung vor Ort"
+    },
+    {
+     "q": "sabbatical",
+     "a": "(einjährige) Freistellung"
+    },
+    {
+     "q": "parental leave",
+     "a": "Erziehungsurlaub"
+    },
+    {
+     "q": "far-reaching implication",
+     "a": "weitreichende Folge"
+    },
+    {
+     "q": "employment",
+     "a": "Arbeitsplätze"
+    },
+    {
+     "q": "low pay",
+     "a": "schlechte Bezahlung"
+    },
+    {
+     "q": "key worker",
+     "a": "jmd., der in einem systemrelevanten Beruf arbeitet"
+    },
+    {
+     "q": "personnel",
+     "a": "Personal"
+    },
+    {
+     "q": "care home",
+     "a": "Pflegeheim"
+    },
+    {
+     "q": "delivery driver",
+     "a": "Auslieferungsfahrer/-in"
+    },
+    {
+     "q": "warehouse",
+     "a": "Lagerhalle"
+    },
+    {
+     "q": "staff",
+     "a": "Mitarbeiter/-innen"
+    },
+    {
+     "q": "to furlough sb",
+     "a": "jmdn. (zwangs-)beurlauben"
+    },
+    {
+     "q": "reduced hours",
+     "a": "Kurzarbeit"
+    },
+    {
+     "q": "to make sb redundant",
+     "a": "jmdn. entlassen"
+    },
+    {
+     "q": "white-collar job",
+     "a": "Bürojob"
+    },
+    {
+     "q": "white-collar worker",
+     "a": "Angestellte/-r"
+    },
+    {
+     "q": "blue-collar worker",
+     "a": "Arbeiter/-in"
+    },
+    {
+     "q": "to force sb to do sth",
+     "a": "jmdn. zwingen, etw. zu tun"
+    },
+    {
+     "q": "to work from home",
+     "a": "Homeoffice machen"
+    },
+    {
+     "q": "remote office",
+     "a": "Homeoffice"
+    },
+    {
+     "q": "time-consuming",
+     "a": "zeitaufwendig"
+    },
+    {
+     "q": "commute",
+     "a": "Weg zur Arbeit; Pendelstrecke"
+    },
+    {
+     "q": "end of the working day",
+     "a": "Feierabend"
+    },
+    {
+     "q": "to have a negative impact on sth",
+     "a": "eine negative Auswirkung auf etw. haben"
+    },
+    {
+     "q": "face-to-face interaction",
+     "a": "persönliche Interaktion"
+    },
+    {
+     "q": "collaboration",
+     "a": "Zusammenarbeit"
+    },
+    {
+     "q": "to have a devastating effect on sb",
+     "a": "verheerende Folgen für jmdn. haben"
+    },
+    {
+     "q": "sector",
+     "a": "Branche; Bereich"
+    },
+    {
+     "q": "worst affected",
+     "a": "am stärksten/schlimmsten betroffen"
+    }
+   ],
+   "createdAt": 1793271119552,
+   "updatedAt": 1793271119552
+  },
+  {
+   "id": "en-13-agile-workplaces",
+   "title": "1.3 Agile workplaces",
+   "lang": "en",
+   "kind": "words",
+   "items": [
+    {
+     "q": "connectivity",
+     "a": "Konnektivität"
+    },
+    {
+     "q": "appropriate",
+     "a": "passend; geeignet"
+    },
+    {
+     "q": "to carry sth out",
+     "a": "etw. durchführen; etw. ausführen"
+    },
+    {
+     "q": "boundary",
+     "a": "Grenze"
+    },
+    {
+     "q": "rapid",
+     "a": "rasch"
+    },
+    {
+     "q": "demand",
+     "a": "Nachfrage"
+    },
+    {
+     "q": "supply and demand",
+     "a": "Angebot und Nachfrage"
+    },
+    {
+     "q": "competition",
+     "a": "Wettbewerb"
+    },
+    {
+     "q": "to react to sth",
+     "a": "reagieren auf etw."
+    },
+    {
+     "q": "uncertainty",
+     "a": "Unsicherheit"
+    },
+    {
+     "q": "agile",
+     "a": "agil; beweglich"
+    },
+    {
+     "q": "hierarchical structure",
+     "a": "hierarchische Struktur"
+    },
+    {
+     "q": "employee",
+     "a": "Arbeitnehmer/-in"
+    },
+    {
+     "q": "employer",
+     "a": "Arbeitgeber/-in"
+    },
+    {
+     "q": "responsibility",
+     "a": "Eigenverantwortung"
+    },
+    {
+     "q": "accountability",
+     "a": "Rechenschaftspflicht"
+    },
+    {
+     "q": "burst of activity",
+     "a": "kurze, sehr intensive Arbeitsphase"
+    },
+    {
+     "q": "continuous",
+     "a": "ständig; kontinuierlich"
+    },
+    {
+     "q": "mobile device",
+     "a": "mobiles Gerät"
+    },
+    {
+     "q": "to work remotely",
+     "a": "orts-/standortunabhängig arbeiten"
+    },
+    {
+     "q": "to collaborate",
+     "a": "gemeinsam mit jmdm. an etw. arbeiten"
+    },
+    {
+     "q": "to assemble (a team)",
+     "a": "(ein Team) zusammenstellen"
+    },
+    {
+     "q": "to dawn",
+     "a": "anbrechen"
+    },
+    {
+     "q": "paradigm",
+     "a": "Paradigma"
+    },
+    {
+     "q": "bureaucracy",
+     "a": "Bürokratie"
+    },
+    {
+     "q": "top-down hierarchy",
+     "a": "Rangordnung von oben nach unten"
+    },
+    {
+     "q": "silo",
+     "a": "Silo (Teil einer Firma, der schlecht mit anderen Teilen zusammenarbeitet)"
+    },
+    {
+     "q": "resources",
+     "a": "Ressourcen"
+    },
+    {
+     "q": "\"boxes and lines\"",
+     "a": "das traditionelle Organigramm einer Firma"
+    }
+   ],
+   "createdAt": 1793271119551,
+   "updatedAt": 1793271119551
+  },
+  {
+   "id": "en-file-illnesses",
+   "title": "English File: Illnesses and injuries",
+   "lang": "en",
+   "kind": "words",
+   "items": [
+    {
+     "q": "allergic reaction",
+     "a": "allergische Reaktion"
+    },
+    {
+     "q": "allergy",
+     "a": "Allergie"
+    },
+    {
+     "q": "to be sick",
+     "a": "krank sein; sich übergeben"
+    },
+    {
+     "q": "sickness",
+     "a": "Krankheit"
+    },
+    {
+     "q": "band-aid / (sticking) plaster",
+     "a": "Pflaster"
+    },
+    {
+     "q": "to bleed",
+     "a": "bluten"
+    },
+    {
+     "q": "bloody",
+     "a": "blutig"
+    },
+    {
+     "q": "bleeding",
+     "a": "blutend"
+    },
+    {
+     "q": "blood",
+     "a": "Blut"
+    },
+    {
+     "q": "blister",
+     "a": "Blase"
+    },
+    {
+     "q": "(high / low) blood pressure",
+     "a": "(hoher / niedriger) Blutdruck"
+    },
+    {
+     "q": "to burn",
+     "a": "verbrennen"
+    },
+    {
+     "q": "cancer",
+     "a": "Krebs"
+    },
+    {
+     "q": "cardiac arrest",
+     "a": "Herzstillstand"
+    },
+    {
+     "q": "to choke",
+     "a": "ersticken; verschlucken"
+    },
+    {
+     "q": "cold",
+     "a": "Erkältung"
+    },
+    {
+     "q": "to come round",
+     "a": "das Bewusstsein wiedererlangen"
+    },
+    {
+     "q": "concussion",
+     "a": "Gehirnerschütterung"
+    },
+    {
+     "q": "cough",
+     "a": "Husten"
+    },
+    {
+     "q": "cure",
+     "a": "Heilmittel"
+    },
+    {
+     "q": "to cut",
+     "a": "schneiden"
+    },
+    {
+     "q": "disease",
+     "a": "Krankheit"
+    },
+    {
+     "q": "diarrhoea",
+     "a": "Durchfall"
+    },
+    {
+     "q": "dizzy",
+     "a": "schwindelig"
+    },
+    {
+     "q": "dizziness",
+     "a": "Schwindel"
+    },
+    {
+     "q": "earache",
+     "a": "Ohrenschmerzen"
+    },
+    {
+     "q": "to faint",
+     "a": "ohnmächtig werden"
+    },
+    {
+     "q": "to feel sick",
+     "a": "sich krank fühlen"
+    },
+    {
+     "q": "flu",
+     "a": "Grippe"
+    },
+    {
+     "q": "food poisoning",
+     "a": "Lebensmittelvergiftung"
+    },
+    {
+     "q": "poison",
+     "a": "Gift"
+    },
+    {
+     "q": "poisonous",
+     "a": "giftig"
+    },
+    {
+     "q": "fracture / to fracture",
+     "a": "Bruch, brechen"
+    },
+    {
+     "q": "to get over",
+     "a": "sich von etw. erholen"
+    },
+    {
+     "q": "GP (General Practitioner) / family doctor",
+     "a": "Hausarzt"
+    },
+    {
+     "q": "headache",
+     "a": "Kopfschmerzen"
+    },
+    {
+     "q": "heart attack",
+     "a": "Herzinfarkt"
+    },
+    {
+     "q": "to hurt",
+     "a": "wehtun"
+    },
+    {
+     "q": "to infect",
+     "a": "anstecken"
+    },
+    {
+     "q": "infection",
+     "a": "die Ansteckung; die Infektion"
+    },
+    {
+     "q": "inflammation",
+     "a": "Entzündung"
+    },
+    {
+     "q": "itch",
+     "a": "das Hautjucken; der Juckreiz"
+    },
+    {
+     "q": "itchy",
+     "a": "juckend; kratzend"
+    },
+    {
+     "q": "to lie down",
+     "a": "sich hinlegen"
+    },
+    {
+     "q": "mental health",
+     "a": "psychische Gesundheit"
+    },
+    {
+     "q": "nausea",
+     "a": "Übelkeit"
+    },
+    {
+     "q": "to be/feel nauseous",
+     "a": "übel sein"
+    },
+    {
+     "q": "to pass out",
+     "a": "schlafen gehen"
+    },
+    {
+     "q": "to prescribe sth",
+     "a": "etw. verschreiben/verordnen"
+    },
+    {
+     "q": "prescription",
+     "a": "ärztliches Rezept"
+    },
+    {
+     "q": "prescription drug/medicine",
+     "a": "rezeptpflichtiges Arzneimittel / Medikament"
+    },
+    {
+     "q": "rash",
+     "a": "Ausschlag"
+    },
+    {
+     "q": "sore throat",
+     "a": "Halsschmerzen"
+    },
+    {
+     "q": "to sprain",
+     "a": "verstauchen"
+    },
+    {
+     "q": "stomach ache",
+     "a": "Magenschmerzen"
+    },
+    {
+     "q": "sunburn",
+     "a": "Sonnenbrand"
+    },
+    {
+     "q": "sunstroke",
+     "a": "Sonnenstich"
+    },
+    {
+     "q": "to swell",
+     "a": "anschwellen"
+    },
+    {
+     "q": "temperature",
+     "a": "Temperatur"
+    },
+    {
+     "q": "to throw up",
+     "a": "sich übergeben"
+    },
+    {
+     "q": "to treat",
+     "a": "behandeln"
+    },
+    {
+     "q": "treatment",
+     "a": "die Behandlung"
+    },
+    {
+     "q": "toothache",
+     "a": "Zahnschmerzen"
+    },
+    {
+     "q": "stroke",
+     "a": "Schlaganfall"
+    },
+    {
+     "q": "unconscious",
+     "a": "bewusstlos"
+    },
+    {
+     "q": "conscious",
+     "a": "bewusst"
+    },
+    {
+     "q": "consciousness",
+     "a": "das Bewusstsein"
+    },
+    {
+     "q": "to lose consciousness",
+     "a": "das Bewusstsein verlieren"
+    },
+    {
+     "q": "to regain consciousness",
+     "a": "das Bewusstsein wiedererlangen"
+    },
+    {
+     "q": "to vaccinate against sth",
+     "a": "impfen gegen etwas"
+    },
+    {
+     "q": "vaccine",
+     "a": "der Impfstoff"
+    },
+    {
+     "q": "vaccination",
+     "a": "Impfung"
+    },
+    {
+     "q": "to vomit",
+     "a": "erbrechen; sich übergeben"
+    }
+   ],
+   "createdAt": 1793271119550,
+   "updatedAt": 1793271119550
+  },
+  {
+   "id": "en-file-clothes",
+   "title": "English File: Clothes and fashion",
+   "lang": "en",
+   "kind": "words",
+   "items": [
+    {
+     "q": "casual",
+     "a": "lässig"
+    },
+    {
+     "q": "checked",
+     "a": "kariert"
+    },
+    {
+     "q": "classic",
+     "a": "klassisch"
+    },
+    {
+     "q": "cotton vest",
+     "a": "Baumwollunterhemd"
+    },
+    {
+     "q": "denim waistcoat",
+     "a": "Denim-Weste"
+    },
+    {
+     "q": "to dress up",
+     "a": "sich in Schale werfen"
+    },
+    {
+     "q": "to fit",
+     "a": "passen"
+    },
+    {
+     "q": "fur collar",
+     "a": "Fellkragen"
+    },
+    {
+     "q": "to get changed",
+     "a": "sich umziehen"
+    },
+    {
+     "q": "to get dressed",
+     "a": "sich anziehen"
+    },
+    {
+     "q": "to get undressed",
+     "a": "sich ausziehen"
+    },
+    {
+     "q": "to go with",
+     "a": "zu etw. passen"
+    },
+    {
+     "q": "to hang up",
+     "a": "aufhängen"
+    },
+    {
+     "q": "hooded",
+     "a": "mit Kapuze"
+    },
+    {
+     "q": "lace top",
+     "a": "Spitzenoberteil"
+    },
+    {
+     "q": "leather sandals",
+     "a": "Ledersandalen"
+    },
+    {
+     "q": "linen suit",
+     "a": "Leinenanzug"
+    },
+    {
+     "q": "long-sleeved",
+     "a": "langärmlig"
+    },
+    {
+     "q": "loose",
+     "a": "weit"
+    },
+    {
+     "q": "lycra swimsuit",
+     "a": "Lycra-Badeanzug"
+    },
+    {
+     "q": "to match",
+     "a": "zu etw. passen"
+    },
+    {
+     "q": "old-fashioned",
+     "a": "altmodisch"
+    },
+    {
+     "q": "patterned",
+     "a": "gemustert"
+    },
+    {
+     "q": "plain",
+     "a": "schlicht"
+    },
+    {
+     "q": "scruffy",
+     "a": "ungepflegt"
+    },
+    {
+     "q": "silk scarf",
+     "a": "Seidenschal"
+    },
+    {
+     "q": "sleeveless",
+     "a": "ärmellos"
+    },
+    {
+     "q": "smart",
+     "a": "schick"
+    },
+    {
+     "q": "spotted",
+     "a": "gepunktet"
+    },
+    {
+     "q": "striped",
+     "a": "gestreift"
+    },
+    {
+     "q": "suede boots",
+     "a": "Wildlederstiefel"
+    },
+    {
+     "q": "to suit",
+     "a": "jdm. stehen"
+    },
+    {
+     "q": "tight",
+     "a": "eng"
+    },
+    {
+     "q": "velvet bow tie",
+     "a": "Samtfliege"
+    },
+    {
+     "q": "V-neck",
+     "a": "V-Ausschnitt"
+    },
+    {
+     "q": "wool(len) cardigan",
+     "a": "wollene Strickjacke"
+    }
+   ],
+   "createdAt": 1793271119549,
+   "updatedAt": 1793271119549
+  }
+ ]
+}
