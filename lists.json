@@ -1,8 +1,8 @@
 {
  "lists": [
   {
-   "id": "en-13-fourth-industrial-revolution",
-   "title": "1.3 The Fourth Industrial Revolution",
+   "id": "en-1-3",
+   "title": "English 1.3",
    "lang": "en",
    "kind": "words",
    "items": [
@@ -169,17 +169,7 @@
     {
      "q": "resilience",
      "a": "Belastbarkeit; Durchhaltevermögen"
-    }
-   ],
-   "createdAt": 1793271119553,
-   "updatedAt": 1793271119553
-  },
-  {
-   "id": "en-13-changing-workplace",
-   "title": "1.3 The changing workplace",
-   "lang": "en",
-   "kind": "words",
-   "items": [
+    },
     {
      "q": "exception",
      "a": "Ausnahme"
@@ -363,17 +353,7 @@
     {
      "q": "worst affected",
      "a": "am stärksten/schlimmsten betroffen"
-    }
-   ],
-   "createdAt": 1793271119552,
-   "updatedAt": 1793271119552
-  },
-  {
-   "id": "en-13-agile-workplaces",
-   "title": "1.3 Agile workplaces",
-   "lang": "en",
-   "kind": "words",
-   "items": [
+    },
     {
      "q": "connectivity",
      "a": "Konnektivität"
@@ -489,17 +469,7 @@
     {
      "q": "\"boxes and lines\"",
      "a": "das traditionelle Organigramm einer Firma"
-    }
-   ],
-   "createdAt": 1793271119551,
-   "updatedAt": 1793271119551
-  },
-  {
-   "id": "en-file-illnesses",
-   "title": "English File: Illnesses and injuries",
-   "lang": "en",
-   "kind": "words",
-   "items": [
+    },
     {
      "q": "allergic reaction",
      "a": "allergische Reaktion"
@@ -791,17 +761,7 @@
     {
      "q": "to vomit",
      "a": "erbrechen; sich übergeben"
-    }
-   ],
-   "createdAt": 1793271119550,
-   "updatedAt": 1793271119550
-  },
-  {
-   "id": "en-file-clothes",
-   "title": "English File: Clothes and fashion",
-   "lang": "en",
-   "kind": "words",
-   "items": [
+    },
     {
      "q": "casual",
      "a": "lässig"
@@ -947,8 +907,8 @@
      "a": "wollene Strickjacke"
     }
    ],
-   "createdAt": 1793271119549,
-   "updatedAt": 1793271119549
+   "createdAt": 1793272063432,
+   "updatedAt": 1793272063432
   }
  ]
 }
